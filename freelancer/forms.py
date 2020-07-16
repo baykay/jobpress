@@ -23,11 +23,11 @@ class FreelancerFilterForm(forms.Form):
     #     })
     # )
     # freelancer_by_profession = forms.CharField(widget=forms.TextInput(
-        attrs={
-            'class': 'form-control',
-            'placeholder': 'Search Profession'
-        }
-    ), required=False)
+    #     attrs={
+    #         'class': 'form-control',
+    #         'placeholder': 'Search Profession'
+    #     }
+    # ), required=False)
     freelancer_by_department = forms.ModelMultipleChoiceField(
         widget=forms.RadioSelect(),
         required=False,
