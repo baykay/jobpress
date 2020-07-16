@@ -10,19 +10,19 @@ User = get_user_model()
 
 
 class FreelancerFilterForm(forms.Form):
-    max_hire_rate = models.FreelancerProfile.objects.aggregate(Max('hire_rate'))
-    min_hire_rate = models.FreelancerProfile.objects.aggregate(Min('hire_rate'))
-    freelancer_by_hourly_rate = forms.ChoiceField(
-        choices=[(f'{v - 1}-{v + 9}', f'${v - 1} - ${v + 9}') for v in range(
-            int(min_hire_rate['hire_rate__min']), int(max_hire_rate['hire_rate__max']),
-            10)],
-        required=False,
-        widget=forms.Select(attrs={
-            'class': 'chosen-select Skills',
-            'style': 'display: none;'
-        })
-    )
-    freelancer_by_profession = forms.CharField(widget=forms.TextInput(
+    # max_hire_rate = models.FreelancerProfile.objects.aggregate(Max('hire_rate'))
+    # min_hire_rate = models.FreelancerProfile.objects.aggregate(Min('hire_rate'))
+    # freelancer_by_hourly_rate = forms.ChoiceField(
+    #     choices=[(f'{v - 1}-{v + 9}', f'${v - 1} - ${v + 9}') for v in range(
+    #         int(min_hire_rate['hire_rate__min']), int(max_hire_rate['hire_rate__max']),
+    #         10)],
+    #     required=False,
+    #     widget=forms.Select(attrs={
+    #         'class': 'chosen-select Skills',
+    #         'style': 'display: none;'
+    #     })
+    # )
+    # freelancer_by_profession = forms.CharField(widget=forms.TextInput(
         attrs={
             'class': 'form-control',
             'placeholder': 'Search Profession'
