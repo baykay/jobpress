@@ -1,1 +1,1 @@
-web: gunicorn YoungBaykay.wsgi
+web: gunicorn JobPress.wsgi
