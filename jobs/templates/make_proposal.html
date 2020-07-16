@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Make a proposal On {{ job_to_propose.title }}</title>
+{% endblock title %}
+{% load static %}
+{% block content %}
+    <main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
+    <div class="wt-haslayout wt-main-section">
+        <!-- User Listing Start-->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 push-lg-2">
+                    <div class="wt-proposalholder">
+                        <span class="wt-featuredtag"><img src="{% static 'images/featured.png' %}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                        <div class="wt-proposalhead">
+                            <h2>{{ job_to_propose.title }} </h2>
+                            <ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
+                                <li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> {{ job_to_propose.membership }}</span></li>
+                                <li><span><img src="{% static 'images/flag/img-02.png' %}" alt="img description">  {{ job_to_propose.country }}</span></li>
+                                <li><span><i class="far fa-folder"></i> Type: {{ job_to_propose.job_type }}</span></li>
+                                <li><span><i class="far fa-clock"></i> Duration: {{ job_to_propose.duration }}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="wt-proposalamount-holder">
+                        <div class="wt-title">
+                            <h2>Proposal Amount</h2>
+                        </div>
+                        <form class="wt-formtheme wt-formproposal" method="post">
+                            <fieldset>
+                                <div class="wt-proposalamount accordion">
+                                    <div class="form-group">
+                                        <span>( <i class="fa fa-dollar-sign"></i> )</span>
+                                        {{ form.amount }}
+                                        {{ form.amount.errors }}
+                                        <a href="javascript:void(0);" class="collapsed" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="lnr lnr-chevron-up"></i></a>
+                                        <em>Total amount the client will see on your proposal</em>
+                                    </div>
+                                    <ul class="wt-totalamount collapse show" id="collapseOne" aria-labelledby="headingOne">
+                                        <li>
+                                            <h3>( <i class="fa fa-dollar-sign"></i> ) <em>- 00.00</em></h3>
+                                            <span><strong>“ JobPress ”</strong> Service Fee<i class="fa fa-exclamation-circle template-content tipso_style" data-tipso="Plus Member"></i></span>
+                                        </li>
+                                        <li>
+                                            <h3>( <i class="fa fa-dollar-sign"></i> ) <em>- 00.00</em></h3>
+                                            <span>Amount You’ll Recive after <strong>“ JobPress ”</strong> Service Fee deduction<i class="fa fa-exclamation-circle template-content tipso_style" data-tipso="Plus Member"></i></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="wt-jobskills wt-tabsinfo">
+                                    <div class="form-group">
+                                        {{ form.duration }}
+                                    </div>
+                                    {{ form.duration.errors }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.description }}
+                                </div>
+                                <div class="wt-attachments wt-attachmentsvtwo">
+                                    <div class="wt-title">
+                                        <label for="{{ form.attachments.id_for_label }}">
+                                            <span><i class="lnr lnr-link"></i> Add Attachments (Optional)</span>
+                                            {{ form.attachments }}
+                                        </label>
+                                        {{ form.attachments.errors }}
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="wt-btn">Send Proposal</button>
+                                    </div>
+                                </div>
+                            </fieldset>{% csrf_token %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- User Listing End-->
+    </div>
+</main>
+{% endblock content %}

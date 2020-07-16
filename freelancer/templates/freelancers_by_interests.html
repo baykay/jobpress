@@ -1,0 +1,123 @@
+<!doctype html>
+<html class="no-js" lang="">
+{% load static %}
+<head>
+    {% block title %}<title>Results for {{ query.name }} </title>{% endblock %}
+    {% include 'partials/stylesheet.html' %}
+</head>
+<body {% if not user.is_authenticated %}class="" {% else %}class="wt-login"{% endif %}>
+	<!-- Preloader Start -->
+{#	<div class="preloader-outer">#}
+{#		<div class="loader"></div>#}
+{#	</div>#}
+	<!-- Preloader End -->
+	<!-- Wrapper Start -->
+	<div id="wt-wrapper" class="wt-wrapper wt-haslayout">
+		<!-- Content Wrapper Start -->
+		<div class="wt-contentwrapper">
+			<!-- Header Start -->
+			{% include 'partials/navbar.html' %}
+			<!--Header End-->
+			<!--Main Start-->
+			<main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
+				<div class="wt-haslayout wt-main-section">
+					<!-- User Listing Start-->
+					<div class="wt-haslayout">
+						<div class="container">
+							<div class="row">
+								<div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
+									{% include 'snippets/sidebar.html' %}
+									<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
+										<div class="wt-userlistingholder wt-haslayout">
+											<div class="wt-userlistingtitle">
+												<span>{{ search_queryset.count }} - {{ page_obj.end_index }} of  {{ total_count.count }} {{ total_company_count.count }}{{ total_freelancer_count.count }} Freelancer{{ total_count.count|pluralize }} found for <em>"{{ query.name }}"</em></span>
+											</div>
+											<div class="wt-filterholder">
+												<ul class="wt-filtertag">
+													<li class="wt-filtertagclear">
+														<a href="javascrip:void(0)"><i class="fa fa-times"></i> <span>Clear All Filter</span></a>
+													</li>
+												 	<li class="alert alert-dismissable fade in">
+														<a href="javascrip:void(0)"><i class="fa fa-times close" data-dismiss="alert" aria-label="close"></i> <span>Graphic Design</span></a>
+													</li>
+													<li class="alert alert-dismissable fade in">
+														<a href="javascrip:void(0)"><i class="fa fa-times close" data-dismiss="alert" aria-label="close"></i> <span>Any Hourly Rate</span></a>
+													</li>
+													<li class="alert alert-dismissable fade in">
+														<a href="javascrip:void(0)"><i class="fa fa-times close" data-dismiss="alert" aria-label="close"></i> <span>Any Freelancer Type</span></a>
+													</li>
+													<li class="alert alert-dismissable fade in">
+														<a href="javascrip:void(0)"><i class="fa fa-times close" data-dismiss="alert" aria-label="close"></i> <span>Chinese</span></a>
+													</li>
+													<li class="alert alert-dismissable fade in">
+														<a href="javascrip:void(0)"><i class="fa fa-times close" data-dismiss="alert" aria-label="close"></i> <span>English</span></a>
+													</li>
+												</ul>
+											</div>
+                                                {% for freelancer in search_queryset %}
+                                                    <div class="wt-userlistinghold">
+                                                        <figure class="wt-userlistingimg">
+                                                            <img src="{{ freelancer.freelancer_profile.avatar.url }}" alt="image description">
+                                                        </figure>
+                                                        <div class="wt-userlistingcontent">
+                                                            <div class="wt-contenthead">
+                                                                <div class="wt-title">
+                                                                    <a href="{% url 'freelancer:detail' username=freelancer.username %}"><i class="fa fa-user"></i> {{ freelancer.get_full_name}}</a>
+                                                                    <h2>{{ freelancer.freelancer_profile.profession }}</h2>
+                                                                </div>
+                                                                <ul class="wt-userlisting-breadcrumb">
+                                                                    <li><span><i class="far fa-money-bill-alt"></i> ${{ freelancer.freelancer_profile.hire_rate }} / hr</span></li>
+                                                                    <li><span><img src="{% static 'images/flag/img-02.png' %}" alt="img description"> {{ freelancer.freelancer_profile.country }}</span></li>
+                                                                    <li><a href="javascript:void(0);"><i class="fa fa-heart"></i> Click to Save</a></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="wt-rightarea">
+                                                                <span class="wt-starsvtwo">
+                                                                    <i class="fa fa-star fill"></i>
+                                                                    <i class="fa fa-star fill"></i>
+                                                                    <i class="fa fa-star fill"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                </span>
+                                                                {% if freelancer.freelancer_profile.confirmed %}
+                                                                    <span class="wt-starcontent"><i class="fa fa-user-circle-o"></i><em>Verified</em></span>
+                                                                {% else %}
+                                                                    <span class="wt-starcontent"><i class="fa fa-user-secret"></i><em>UnVerified</em></span>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="wt-description">
+                                                            <p>{{ freelancer.freelancer_profile.description | capfirst | truncatewords:40 }}</p>
+                                                        </div>
+                                                        <div class="wt-tag wt-widgettag">
+                                                            {% for interest in freelancer.freelancer_profile.interests.all %}
+                                                                <a href="{% url 'freelancer:similar_freelancers' slug=interest.slug %}">{{ interest.name }}</a>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+											<nav class="wt-pagination">
+												{% include 'partials/pagination.html' %}
+											</nav>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- User Listing End-->
+				</div>
+			</main>
+			<!--Main End-->
+			<!--Footer Start-->
+			{% include 'partials/footer.html' %}
+			<!--Footer End-->
+		</div>
+		<!--Content Wrapper End-->
+	</div>
+	<!--Wrapper End-->
+    {% include 'partials/scripts.html' %}
+</body>
+
+
+</html>

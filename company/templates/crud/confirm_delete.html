@@ -1,0 +1,20 @@
+{% extends 'dashboard_base.html' %}
+{% block title %}<title>Delete: {{ object.title }}</title>{% endblock %}
+{% load static %}
+{% block dashboard %}
+<!--Register Form Start-->
+    <div class="wt-haslayout wt-jobalertsdashboard">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 m-auto">
+                <div class="wt-jobalerts">
+                    <div class="alert alert-warning alert-dismissible fade show">
+                        <em>Sure To Delete...</em> <span> {{ object.title }}?</span>
+                        <a href="{% url 'company:manage_jobs' %}" class="close"><strong style="font-size: x-large"><i class="lnr lnr-arrow-left"></i></strong></a>
+                        <button type="submit" class="wt-alertbtn danger"><i class="lnr lnr-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--Register Form End-->
+{% endblock dashboard %}

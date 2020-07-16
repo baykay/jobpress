@@ -1,0 +1,69 @@
+{% extends 'dashboard_base.html' %}
+{% block title %}<title>Provide a feedback</title>{% endblock title %}
+{% load static %}
+{% block dashboard %}
+
+<div class="wt-uploadimages" id="wt-projectmodalbox" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="wt-modaldialog modal-dialog" role="document">
+        <div class="wt-modalcontent modal-content">
+            <div class="wt-boxtitle">
+                <h2>Project Status </h2>
+            </div>
+            <div class="wt-modalbody modal-body">
+                <form class="wt-formtheme wt-formfeedback" method="post">{% csrf_token %}
+                    <fieldset>
+                        <div class="form-group">
+                            {{ form.feedback }}
+                        </div>
+                        <div class="wt-securitysettings wt-tabsinfo">
+                            <div class="wt-securityhold tab-pane active fade show" id="wt-security">
+                                <div class="wt-tabscontenttitle">
+                                    <h2>Describe your experiences you had with FIRSTNAME</h2>
+                                </div>
+                                <div class="wt-settingscontent">
+                                    <div class="wt-description">
+                                        <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua aut enim ad minim veniamac quis nostrud exercitation ullamco laboris.</p>
+                                    </div>
+                                    <ul class="wt-accountinfo">
+                                        <li>
+                                            <div class="wt-on-off pull-right">
+                                                {{ form.quality }}
+                                                <label for="{{ form.quality.id_for_label }}"><i></i></label>
+                                            </div>
+                                            <span>{{ form.quality.label }}</span>
+                                        </li>
+                                        <li>
+                                            <div class="wt-on-off pull-right">
+                                                {{ form.deadline }}
+                                                <label for="{{ form.deadline.id_for_label }}"><i></i></label>
+                                            </div>
+                                            <span>{{ form.deadline.label }}</span>
+                                        </li>
+                                        <li>
+                                            <div class="wt-on-off pull-right">
+                                                {{ form.services }}
+                                                <label for="{{ form.services.id_for_label }}"><i></i></label>
+                                            </div>
+                                            <span>{{ form.services.label }}</span>
+                                        </li>
+                                        <li>
+                                            <div class="wt-on-off pull-right">
+                                                {{ form.behaviour }}
+                                                <label for="{{ form.behaviour.id_for_label }}"><i></i></label>
+                                            </div>
+                                            <span>{{ form.behaviour.label }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        <div class="form-group wt-btnarea">
+                            <button type="submit" class="wt-btn">Send Feedback</button>
+                        </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock dashboard %}

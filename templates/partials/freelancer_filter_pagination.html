@@ -1,0 +1,17 @@
+{% if is_paginated %}
+    <ul>
+    {% if page_obj.has_previous %}
+        <li class="wt-prevpage"><a href="?page={{ page_obj.previous_page_number }}{% if select_freelancer_by_interests %}&select_freelancer_by_interests={% for interest in request.GET.select_freelancer_by_interests %}{{ interest }}{% endfor %}{% endif %}{% if freelancer_by_country %}&freelancer_by_country{{ freelancer_by_country }}{% endif %}{% if search_freelancer_by_interests %}&search_freelancer_by_interests={{ search_freelancer_by_interests }}{% endif %}{% if freelancer_by_account_type %}&freelancer_by_account_type={{ freelancer_by_account_type }}{% endif %}{% if freelancer_by_department %}&freelancer_by_department={{ freelancer_by_department }}{% endif %}{% if freelancer_by_profession %}&freelancer_by_profession={{ freelancer_by_profession }}{% endif %}{% if freelancer_by_hourly_rate %}&freelancer_by_hourly_rate={{ freelancer_by_hourly_rate }}{% endif %}"><i class="lnr lnr-chevron-left"></i></a></li>
+    {% endif %}
+    {% for page in page_obj.paginator.page_range %}
+        {% if page_obj.number == page %}
+            <li><a href="" class="wt-btndisbaled">...</a></li>
+        {% elif page > page_obj.number|add:'-5' and page < page_obj.number|add:'5' %}
+            <li><a href="?page={{ page }}{% if select_freelancer_by_interests %}&select_freelancer_by_interests={% for interest in request.GET.select_freelancer_by_interests %}{{ interest }}{% endfor %}{% endif %}{% if freelancer_by_country %}&freelancer_by_country{{ freelancer_by_country }}{% endif %}{% if search_freelancer_by_interests %}&search_freelancer_by_interests={{ search_freelancer_by_interests }}{% endif %}{% if freelancer_by_account_type %}&freelancer_by_account_type={{ freelancer_by_account_type }}{% endif %}{% if freelancer_by_department %}&freelancer_by_department={{ freelancer_by_department }}{% endif %}{% if freelancer_by_profession %}&freelancer_by_profession={{ freelancer_by_profession }}{% endif %}{% if freelancer_by_hourly_rate %}&freelancer_by_hourly_rate={{ freelancer_by_hourly_rate }}{% endif %}">{{ page }}</a></li>
+        {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+        <li class="wt-nextpage"><a href="?page={{ page_obj.next_page_number }}{% if select_freelancer_by_interests %}&select_freelancer_by_interests={% for interest in request.GET.select_freelancer_by_interests %}{{ interest }}{% endfor %}{% endif %}{% if freelancer_by_country %}&freelancer_by_country{{ freelancer_by_country }}{% endif %}{% if search_freelancer_by_interests %}&search_freelancer_by_interests={{ search_freelancer_by_interests }}{% endif %}{% if freelancer_by_account_type %}&freelancer_by_account_type={{ freelancer_by_account_type }}{% endif %}{% if freelancer_by_department %}&freelancer_by_department={{ freelancer_by_department }}{% endif %}{% if freelancer_by_profession %}&freelancer_by_profession={{ freelancer_by_profession }}{% endif %}{% if freelancer_by_hourly_rate %}&freelancer_by_hourly_rate={{ freelancer_by_hourly_rate }}{% endif %}"><i class="lnr lnr-chevron-right"></i></a></li>
+    {% endif %}
+    </ul>
+{% endif %}

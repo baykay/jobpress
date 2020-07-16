@@ -1,0 +1,155 @@
+{% load static %}
+<!--Skills Start-->
+<section class="wt-haslayaout wt-main-section wt-footeraboutus">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+                <div class="wt-widgetskills">
+                    <div class="wt-fwidgettitle">
+                        <h3>Jobs By Skills</h3>
+                    </div>
+                    <ul class="wt-fwidgetcontent">
+                        {% for skill in footer_skills %}
+                             <li><a href="{% url 'jobs:jobs_skills_list' slug=skill.slug %}">
+                                 {{ skill.all_skills }}
+                             </a></li>
+                        {% endfor %}
+                        <li class="wt-viewmore"><a href="{% url 'jobs:all-skills' %}"> View All</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+                <div class="wt-widgetskill">
+                    <div class="wt-fwidgettitle">
+                        <h3>Jobs By Departments</h3>
+                    </div>
+                    <ul class="wt-fwidgetcontent">
+                        {% for department in footer_departments %}
+                            <li><a href="{% url 'jobs:jobs_department_list' slug=department.slug %}">
+                                {{ department.department }}
+                            </a></li>
+                        {% endfor %}
+                        <li class="wt-viewmore"><a href="{% url 'jobs:all-departments' %}"> View All</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+                <div class="wt-footercol wt-widgetcategories">
+                    <div class="wt-fwidgettitle">
+                        <h3>Jobs By Categories</h3>
+                    </div>
+                    <ul class="wt-fwidgetcontent">
+                        {% for category in footer_categories %}
+                            <li><a href="{% url 'jobs:jobs_categories_list' slug=category.slug %}">
+                                {{ category.name  }}
+                            </a></li>
+                        {% endfor %}
+                        <li class="wt-viewmore"><a href="{% url 'jobs:all-categories' %}"> View All</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+                <div class="wt-widgetbylocation">
+                    <div class="wt-fwidgettitle">
+                        <h3>Jobs By Country</h3>
+                    </div>
+                    <ul class="wt-fwidgetcontent">
+                        {% for country in footer_countries %}
+                              <li><a href="{% url 'jobs:jobs_countries_list' slug=country.slug %}">
+                                  Jobs In: {{ country.name  }}
+                              </a></li>
+                        {% endfor %}
+                        <li class="wt-viewmore"><a href="{% url 'jobs:all-countries' %}"> View All</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Skills Start End-->
+<footer id="wt-footer" class="wt-footer wt-haslayout">
+    <div class="wt-footerholder wt-haslayout">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="wt-footerlogohold">
+                        <strong class="wt-logo"><a href="#"><img src="{% static 'images/flogo.png' %}" alt="company logo here"></a></strong>
+                        <div class="wt-description">
+                            <p>
+                                Dotem eiusmod tempor incune utnaem labore etdolore maigna aliqua enim poskina ilukita ylokem
+                                lokateise ination voluptate velit esse cillum dolore eu fugiat nulla pariatur lokaim urianewce
+                                <a href="{% url 'about' %}">more...</a></p>
+                        </div>
+                        <ul class="wt-socialiconssimple wt-socialiconfooter">
+                            <li class="wt-facebook"><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                            <li class="wt-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li class="wt-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                            <li class="wt-instagram"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                            <li class="wt-googleplus"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+                    <div class="wt-footercol wt-widgetcompany">
+                        <div class="wt-fwidgettitle">
+                            <h3>Accounts Model Jobs</h3>
+                        </div>
+                        <ul class="wt-fwidgetcontent">
+                            {% for account in footer_account_type %}
+                                <li><a href="{% url 'jobs:jobs_accounts_list' slug=account.slug %}">{{ account.title  }}</a></li>
+                            {% endfor %}
+                            <li class="wt-viewmore"><a href="{% url 'jobs:all-accounts' %}">+ View All</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+                    <div class="wt-footercol wt-widgetexplore">
+                        <div class="wt-fwidgettitle">
+                            <h3>Explore More</h3>
+                        </div>
+                        <ul class="wt-fwidgetcontent">
+                            <li><a href="#">Freelancers in USA</a></li>
+                            <li><a href="#">Freelancers in Canada</a></li>
+                            <li><a href="#">Freelancers in Australia</a></li>
+                            <li><a href="#">Jobs in USA</a></li>
+                            <li><a href="#">Find Jobs</a></li>
+                            <li class="wt-viewmore"><a href="#">+ View All</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wt-haslayout wt-joininfo">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 push-lg-1">
+                    <div class="wt-companyinfo">
+                        <span><a href="javascript:void(0);">Become a pro member</a> Upgrade to pro for amazing offers</span>
+                    </div>
+                    <div class="wt-fbtnarea">
+                        <a href="{% url 'accounts:register' %}" class="wt-btn">Join Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wt-haslayout wt-footerbottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="wt-copyrights"><a target="_blank" href="{% url 'index' %}" class="footer-name">JobPress</a></p>
+                    <nav class="wt-addnav">
+                        <ul>
+                            <li><a href="{% url 'about' %}">About Us</a></li>
+                            <li><a href="{% url 'process' %}">Working Process</a></li>
+                            <li><a href="{% url 'policy' %}">Privacy Policy</a></li>
+                            <li><a href="{% url 'index' %}">Home</a></li>
+                            <li><a href="{% url 'blog:article_list' %}">Blog</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

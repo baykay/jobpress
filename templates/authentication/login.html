@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<!--Main Start-->
+<main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
+    <div class="wt-haslayout wt-main-section">
+        <!-- User Listing Start-->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 push-lg-2">
+                    {% include 'partials/messages.html' %}
+                    <div class="wt-proposalamount-holder">
+                        <div class="wt-title">
+                            <h2>Login Portal</h2>
+                        </div>
+                        {% for error in form.errors %}
+                            <div class="wt-jobalertsholder mt-2">
+                                <ul class="wt-jobalerts">
+                                    <li class="alert alert-error alert-dismissible fade show">
+                                        <span>{{ error|capfirst }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% endfor %}
+                        <form method="post" class="wt-formtheme wt-loginform do-login-form">
+                            {% csrf_token %}
+                            <fieldset>
+                                <div class="form-group">
+                                    {{ form.email }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.password }}
+                                </div>
+                                <div class="wt-btnarea">
+                                    <button type="submit" class="wt-btn">Login</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- User Listing End-->
+    </div>
+</main>
+<!--Main End-->
+{% endblock content %}

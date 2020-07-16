@@ -1,0 +1,109 @@
+{% extends 'dashboard_base.html' %}
+{% block title %}<title>Freelancer Projects</title>{% endblock %}
+{% load static %}
+{% block dashboard %}
+<!--Register Form Start-->
+<section class="wt-haslayout">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
+            <div class="wt-haslayout wt-dbsectionspace">
+            {% include 'partials/messages.html' %}
+                <div class="wt-dashboardbox wt-dashboardtabsholder">
+                    <div class="wt-dashboardboxtitle">
+                        <h2>My Awards</h2>
+                    </div>
+                    <div class="wt-dashboardtabs">
+                        <ul class="wt-tabstitle nav navbar-nav">
+                            <li class="nav-item"><a class="active" data-toggle="tab" href="#wt-skills">Personal Awards</a></li>
+                        </ul>
+                    </div>
+                    <div class="wt-tabscontent tab-content">
+                        <div class="wt-personalskillshold tab-pane active fade show" id="wt-skills">
+                            <div class="wt-addprojectsholder">
+                                <div class="wt-tabscontenttitle wt-addnew">
+                                    <h2>Add Your Awards</h2>
+                                </div>
+                                <ul class="wt-experienceaccordion accordion">
+                                    <li>
+                                        <div class="wt-collapseexp" id="innertitleawone" aria-labelledby="accordioninnertitle" data-parent="#accordion">
+                                            <form class="wt-formtheme wt-userform wt-formprojectinfo" method="post" enctype="multipart/form-data">
+                                                <fieldset>{% csrf_token %}{{ form.errors }}
+                                                    <div class="form-group form-group-half">
+                                                        {{ form.title }}
+                                                    </div>
+                                                    <div class="form-group form-group-half">
+                                                        {{ form.award_date }}
+                                                    </div>
+                                                    <div class="form-group form-group-label wt-infouploading">
+                                                        <div class="wt-labelgroup">
+                                                            <label for="file">
+                                                                <span class="wt-btn">Select Files</span>
+                                                                {{ form.image }}
+                                                            </label>
+                                                            <span>Drop files here to upload</span>
+                                                            <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group wt-btnarea">
+                                                        {% if not form.instance.pk %}
+                                                            <button type="submit" class="wt-btn">Add</button>
+                                                        {% else %}
+                                                            <button type="submit" class="wt-btn">Update</button>
+                                                        {% endif %}
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </li>
+                                    <li>{% for award in awards %}
+                                        <div class="wt-accordioninnertitle">
+                                            <div class="wt-projecttitle collapsed" data-toggle="collapse" data-target="#innertitlebwone">
+                                                <figure><img src="{{ award.image.url }}" alt="img description"></figure>
+                                                <h3>{{ award.title | title }}<samp>{{ award.award_date }}</samp></h3>
+                                            </div>
+                                            <div class="wt-rightarea">
+                                                <a href="{% url 'freelancer:awards_update' award.pk %}" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
+                                                <a href="{% url 'freelancer:awards_delete' award.pk %}" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <div class="wt-haslayout wt-dbsectionspace wt-codescansidebar">
+                <div class="tg-authorcodescan wt-codescanholder">
+                    <figure class="tg-qrcodeimg">
+                        <img src="{% static 'images/qrcode.png' %}" alt="img description">
+                    </figure>
+                    <div class="tg-qrcodedetail">
+                        <span class="lnr lnr-laptop-phone"></span>
+                        <div class="tg-qrcodefeat">
+                            <h3>Scan with your <span>Smart Phone </span> To Get It Handy.</h3>
+                        </div>
+                    </div>
+                    <div class="wt-codescanicons">
+                        <span>Share Your Profile</span>
+                        <ul class="wt-socialiconssimple">
+                            <li class="wt-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook-f"></i></a></li>
+                            <li class="wt-twitter"><a href="javascript:void(0);"><i class="fab fa-twitter"></i></a></li>
+                            <li class="wt-linkedin"><a href="javascript:void(0);"><i class="fab fa-linkedin-in"></i></a></li>
+                            <li class="wt-clone"><a href="javascript:void(0);"><i class="far fa-clone"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="wt-companyad">
+                    <figure class="wt-companyadimg"><img src="{% static 'images/add-img.jpg' %}" alt="img description"></figure>
+                    <span>Advertisement  255px X 255px</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Register Form End-->
+{% endblock dashboard %}

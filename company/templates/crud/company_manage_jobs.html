@@ -1,0 +1,57 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+{% block dashboard %}
+<!--Register Form Start-->
+<section class="wt-haslayout wt-dbsectionspace">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 m-auto">
+            <div class="wt-dashboardbox wt-categorys">
+                <div class="wt-dashboardboxtitle wt-titlewithsearch">
+                    <h2>{{ company_name }} Jobs</h2>
+                    <form class="wt-formtheme wt-formsearch">
+                        <fieldset>
+                            <div class="form-group">
+                                <input type="text" name="category" class="form-control" placeholder="Search Jobs">
+                                <a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="wt-dashboardboxcontent wt-categoriescontentholder">
+                    <table class="wt-tablecategories">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for job in jobslistings_list %}
+                            <tr>
+                                <td><figure><img src="{% static 'images/categories/img-09.png' %}" alt="img description"></figure></td>
+                                <td>{{ job.title }}</td>
+                                <td>{{ job.category }}</td>
+                                <td>
+                                    <div class="wt-actionbtn">
+                                        <a href="{% url 'company:update_job' slug=job.slug %}" class="wt-addinfo wt-skillsaddinfo">
+                                            <i class="lnr lnr-pencil"></i></a>
+                                        <a href="{% url 'company:delete_job' slug=job.slug %}" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <nav class="wt-pagination">
+                       {% include 'partials/pagination.html' %}
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Register Form End-->
+<!--Main End-->
+{% endblock dashboard %}

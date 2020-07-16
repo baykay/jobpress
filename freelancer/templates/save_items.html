@@ -1,0 +1,55 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+{% block title %}<title>{{ user.freelancer_profile }} Saved Items</title>{% endblock title %}
+{% block dashboard %}
+<section class="wt-haslayout wt-dbsectionspace">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
+            <div class="wt-dashboardbox wt-dashboardtabsholder wt-saveitemholder">
+                <div class="wt-dashboardtabs">
+                    <ul class="wt-tabstitle nav navbar-nav">
+                        <li class="nav-item"><a class="active" data-toggle="tab" href="#wt-skills">Saved Jobs</a></li>
+                        <li class="nav-item"><a href="{% url 'freelancer:followed_companies' %}">Followed Companies</a></li>
+                        <li class="nav-item"><a href="#wt-awards">Liked Freelancers</a></li>
+                    </ul>
+                </div>
+                <div class="wt-tabscontent tab-content tab-savecontent">
+                    <div class="wt-personalskillshold tab-pane active fade show" id="wt-skills">
+                        <div class="wt-yourdetails">
+                            <div class="wt-tabscontenttitle">
+                                <h2>Saved Jobs</h2>
+                            </div>
+                            <div class="wt-dashboradsaveitem">
+                                {% for item in saved_items %}
+                                    <div class="wt-userlistinghold wt-featured wt-dashboradsaveditems">
+                                        <span class="wt-dashboardsavetag wt-featuredtag"><img src="{% static 'images/featured.png' %}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                        <div class="wt-userlistingcontent">
+                                            <div class="wt-contenthead wt-dashboardsavehead">
+                                                <div class="wt-title">
+                                                    <a href="usersingle.html"><i class="fa fa-check-circle"></i> {{ item.company.name | title }}
+                                                    </a>
+                                                    <h2>{{ item.title }}</h2>
+                                                </div>
+                                                <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
+                                                    <li><span><img src="{% static 'images/flag/img-04.png' %}" alt="img description"> {{ item.country }}</span></li>
+                                                    <li><a href="{% url 'jobs:jobs_accounts_list' slug=item.account_type.slug %}" class="wt-clicksavefolder"><i class="far fa-folder"></i> Account Type: {{ item.account_type }}</a></li>
+                                                    <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: {{ item.duration }}</span></li>
+                                                    <li><a href="" class="wt-clicksave wt-btndisbaled"><i class="fa fa-heart"></i> Saved</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <nav class="wt-pagination wt-savepagination">
+                            {% include 'partials/pagination.html' %}
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'partials/freelancer_sidebar.html' %}
+    </div>
+</section>
+{% endblock dashboard %}

@@ -1,0 +1,81 @@
+{% extends 'dashboard_base.html' %}
+{% block title %}<title>Freelancer Projects</title>{% endblock %}
+{% load static %}
+{% block dashboard %}
+<!--Register Form Start-->
+<section class="wt-haslayout">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
+            <div class="wt-haslayout wt-dbsectionspace">
+            {% include 'partials/messages.html' %}
+                <div class="wt-dashboardbox wt-dashboardtabsholder">
+                    <div class="wt-dashboardboxtitle">
+                        <h2>My Profile</h2>
+                    </div>
+                    <div class="wt-dashboardtabs">
+                        <ul class="wt-tabstitle nav navbar-nav">
+                            <li class="nav-item"><a class="active" data-toggle="tab" href="#wt-skills">Personal Project</a></li>
+                        </ul>
+                    </div>
+                    <div class="wt-tabscontent tab-content">
+                        <div class="wt-personalskillshold tab-pane active fade show" id="wt-skills">
+                            <div class="wt-addprojectsholder wt-tabsinfo">
+                                <div class="wt-tabscontenttitle wt-addnew">
+                                    <h2>Add Your Projects</h2>
+                                </div>
+                                <ul class="wt-experienceaccordion accordion">
+                                    <li>
+                                        <div class="wt-collapseexp" id="innertitleaone" aria-labelledby="accordioninnertitle" data-parent="#accordion">
+                                            <form method="post" class="wt-formtheme wt-userform wt-formprojectinfo" novalidate enctype="multipart/form-data">{% csrf_token %}
+                                                <fieldset>
+                                                    <div class="form-group form-group-half">
+                                                        {{ form.name }}
+                                                    </div>
+                                                    <div class="form-group form-group-half">
+                                                        {{ form.url }}
+                                                    </div>
+                                                    <div class="form-group form-group-label wt-infouploading">
+                                                        <div class="wt-labelgroup">
+                                                            <label for="{{ form.image.id_for_label }}">
+                                                                <span class="wt-btn">{{ form.image.label_tag }}</span>
+                                                                {{ form.image }}
+                                                            </label>
+                                                            <span>Drop files here to upload</span>
+                                                            <em class="wt-fileuploading">Upload square sized image<i class="fa fa-spinner fa-spin"></i></em>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group wt-btnarea">
+                                                        {% if not form.instance.pk %}
+                                                            <button type="submit" class="wt-btn">Add</button>
+                                                        {% else %}
+                                                            <button type="submit" class="wt-btn">Update</button>
+                                                        {% endif %}
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                        {% for project in projects %}
+                                            <div class="wt-accordioninnertitle mb-1">
+                                                <div class="wt-projecttitle collapsed" data-toggle="collapse" data-target="#innertitlebone">
+                                                    <figure><img src="{{ project.image.url }}" alt="img description"></figure>
+                                                    <h3>{{ project.name | title }}<span>{{ project.url | urlize }}</span></h3>
+                                                </div>
+                                                <div class="wt-rightarea">
+                                                    <a href="{% url 'freelancer:project_update' project.id %}" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
+                                                    <a href="{% url 'freelancer:project_delete' project.id %}" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'partials/sidebar.html' %}
+    </div>
+</section>
+<!--Register Form End-->
+{% endblock dashboard %}

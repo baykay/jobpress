@@ -1,0 +1,180 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+{% block  title %}<title>Company profile title</title>{% endblock title %}
+{% block dashboard %}
+    <section class="wt-haslayout">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
+                <div class="wt-haslayout wt-dbsectionspace">
+                    {% include 'partials/messages.html' %}
+                    <div class="wt-dashboardbox wt-dashboardtabsholder">
+                        <div class="wt-dashboardboxtitle">
+                            <h2>Company Profile</h2>
+                        </div>
+                        <div class="wt-tabscontent tab-content">
+                            <div class="wt-personalskillshold tab-pane active fade show" id="wt-skills">
+                                <div class="wt-yourdetails wt-tabsinfo">
+                                    <div class="wt-tabscontenttitle">
+                                        <h2>Your Details</h2>
+                                    </div>
+                                    <form method="post" novalidate class="wt-formtheme wt-userform" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <fieldset>
+                                            <div class="form-group form-group-half">
+                                                <span class="wt-select">
+                                                    {{ form.account_type }}
+                                                </span>
+                                            </div>
+                                            <div class="form-group form-group-half">
+                                                {{ form.name }}
+                                            </div>
+                                            <div class="form-group">
+                                                {{ form.tagline }}
+                                            </div>
+                                            <div class="form-group">
+                                                {{ form.description }}
+                                            </div>
+                                            <br>
+                                            <div class="wt-profilephoto wt-tabsinfo">
+                                                <div class="wt-tabscontenttitle">
+                                                    <h2>Company Logo</h2>
+                                                </div>
+                                                <div class="wt-profilephotocontent">
+                                                    <div class="wt-description">
+                                                        <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                                                            et dolore magna aliqua aut enim ad minim veniamac quis nostrud
+                                                            exercitation ullamco laboris.</p>
+                                                    </div>
+                                                    <div class="form-group form-group-label">
+                                                        <div class="wt-labelgroup">
+                                                            <label for="{{ form.logo.id_for_label }}">
+                                                                <span class="wt-btn">{{ form.logo.label_tag }}</span>
+                                                                {{ form.logo }}
+                                                            </label>
+                                                            <span>Drop files here to upload</span>
+                                                            <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <ul class="wt-attachfile wt-attachfilevtwo">
+                                                        <li class="wt-uploadingholder">
+                                                            <div class="wt-uploadingbox">
+                                                                <div class="wt-designimg">
+                                                                    <input id="demoz" type="radio" name="employees" value="company"
+                                                                        checked="">
+                                                                    <label for="demoz"><img
+                                                                            src="{{ user.company_profile.logo.url }}" alt="img description"><i class="fa fa-check"></i>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="wt-bannerphoto wt-tabsinfo">
+                                                <div class="wt-tabscontenttitle">
+                                                    <h2>Banner Photo</h2>
+                                                </div>
+                                                <div class="wt-profilephotocontent">
+                                                <div class="wt-description">
+                                                    <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                                                        et dolore magna aliqua aut enim ad minim veniamac quis nostrud
+                                                        exercitation ullamco laboris.</p>
+                                                </div>
+                                                    <div class="form-group form-group-label">
+                                                        <div class="wt-labelgroup">
+                                                            <label for="{{ form.banner.id_for_label }}">
+                                                                <span class="wt-btn">{{ form.banner.label_tag }}</span>
+                                                                {{ form.banner }}
+                                                                <input type="file" name="banner" id="filew">
+                                                            </label>
+                                                            <span>Drop files here to upload</span>
+                                                            <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <ul class="wt-attachfile wt-attachfilevtwo">
+                                                        <li class="wt-uploadingholder wt-companyimg-uploading">
+                                                            <div class="wt-uploadingbox">
+                                                                <figure>
+                                                                    <img src="{{ user.company_profile.banner.url }}"alt="img description">
+                                                                </figure>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="wt-location wt-tabsinfo">
+                                                <div class="wt-tabscontenttitle">
+                                                    <h2>Your Location</h2>
+                                                </div>
+                                                <div class="wt-jobskills wt-tabsinfo">
+                                                    <div class="form-group">
+                                                        {{ form.country }}
+                                                    </div>
+                                                    {{ form.country.errors }}
+                                                </div>
+                                                <div class="form-group ">
+                                                    {{ form.address }}
+                                                </div>
+                                            </div>
+                                            <div class="wt-tabcompanyinfo wt-tabsinfo">
+                                                <div class="wt-tabscontenttitle">
+                                                    <h2>Number of employees</h2>
+                                                </div>
+                                                <div class="wt-accordiondetails">
+                                                    <div class="form-group">
+                                                        <div class="form-group-holder">
+                                                            <span class="wt-select">
+                                                                {{ form.employees }}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="wt-btn">Update and save</button>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                <div class="wt-haslayout wt-dbsectionspace wt-codescansidebar">
+                    <div class="tg-authorcodescan wt-codescanholder">
+                        <figure class="tg-qrcodeimg">
+                            <img src="{% static 'images/qrcode.png' %}" alt="img description">
+                        </figure>
+                        <div class="tg-qrcodedetail">
+                            <span class="lnr lnr-laptop-phone"></span>
+                            <div class="tg-qrcodefeat">
+                                <h3>Scan with your <span>Smart Phone </span> To Get It Handy.</h3>
+                            </div>
+                        </div>
+                        <div class="wt-codescanicons">
+                            <span>Share Your Profile</span>
+                            <ul class="wt-socialiconssimple">
+                                <li class="wt-facebook"><a href="javascript:void(0);"><i
+                                            class="fa fa-facebook-f"></i></a></li>
+                                <li class="wt-twitter"><a href="javascript:void(0);"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li class="wt-linkedin"><a href="javascript:void(0);"><i
+                                            class="fab fa-linkedin-in"></i></a></li>
+                                <li class="wt-clone"><a href="javascript:void(0);"><i class="far fa-clone"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="wt-companyad">
+                        <figure class="wt-companyadimg"><img src="{% static 'images/add-img.jpg' %}" alt="img description"></figure>
+                        <span>Advertisement 255px X 255px</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!--Main End-->
+{% endblock dashboard %}

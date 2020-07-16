@@ -1,0 +1,200 @@
+{% extends 'dashboard_base.html' %}
+{% block title %}<title>{{ hired_job.title | title }} hired Details</title>{% endblock title %}
+{% load static %}
+{% block dashboard %}
+<!--Register Form Start-->
+<section class="wt-haslayout wt-dbsectionspace">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-9 float-right m-auto">
+            {% include 'partials/messages.html' %}
+            <div class="wt-dashboardbox">
+                <div class="wt-dashboardboxtitle">
+                    <h2><em>{{ hired_job | title }} </em></h2>
+                </div>
+                <div class="wt-dashboardboxcontent wt-jobdetailsholder">
+                    <div class="wt-freelancerholder wt-tabsinfo">
+                        <div class="wt-tabscontenttitle">
+                            <h2>Hired Freelancer</h2>
+                        </div>
+                        <div class="wt-jobdetailscontent">
+                            <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
+                                <span class="wt-featuredtag"><img src="{% static 'images/featured.png' %}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                <div class="wt-userlistingcontent">
+                                    <div class="wt-contenthead">
+                                        <div class="wt-title">
+                                            <a href="usersingle.html"><i class="fa fa-check-circle"></i> {{ hired_job.hired_freelancer.freelancer_profile.get_full_name | title }}
+                                            </a>
+                                            <h2>{{ hired_job.hired_freelancer.freelancer_profile.profession | capfirst }}</h2>
+                                        </div>
+                                        <ul class="wt-userlisting-breadcrumb">
+                                            <li><span><i class="far fa-money-bill-alt"></i> ${{ hired_job.hired_freelancer.freelancer_profile.hire_rate }} / hr</span></li>
+                                            <li><span><img src="{% static 'images/flag/img-02.png' %}" alt="img description">  {{ hired_job.hired_freelancer.freelancer_profile.country | title }}</span></li>
+                                            <li><a href="javascript:void(0);" class="wt-clicksave"><i class="fa fa-heart"></i> Save</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="wt-rightarea">
+                                        <div class="wt-hireduserstatus">
+                                            <h4>Hired</h4><span>{{ hired_job.hired_freelancer.freelancer_profile.get_full_name | title }}</span>
+                                            <ul class="wt-hireduserimgs">
+                                                <li><figure><img src="{{ hired_job.hired_freelancer.freelancer_profile.avatar.url }}" alt="img description"></figure></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wt-rcvproposalholder wt-hiredfreelancer wt-tabsinfo">
+                        <div class="wt-tabscontenttitle">
+                            <h2>Mark job status as completed and closed this job.</h2>
+                        </div>
+                        <div class="wt-jobdetailscontent">
+                            <div class="wt-userlistinghold wt-featured wt-proposalitem">
+                                <span class="wt-featuredtag"><img src="{% static 'images/featured.png' %}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span>
+                                <figure class="wt-userlistingimg">
+                                    <img src="{{ hired_job_proposal.freelancer.freelancer_profile.avatar.url }}" alt="image description" class="mCS_img_loaded">
+                                </figure>
+                                <div class="wt-proposaldetails">
+                                    <div class="wt-contenthead">
+                                        <div class="wt-title">
+                                            <a href="#"> {{ hired_job_proposal.freelancer.freelancer_profile.get_full_name }}</a>
+                                        </div>
+                                    </div>
+                                    <div class="wt-proposalfeedback">
+                                        <span class="wt-starsvtwo">
+                                            <i class="fa fa-star fill"></i>
+                                        </span>
+                                        <span class="wt-starcontent"> 4.5/<i>5</i> <em> (860 Feedback)</em></span>
+                                    </div>
+                                </div>
+                                <div class="wt-rightarea wt-titlewithsearch">
+                                    <form class="wt-formtheme wt-formsearch" method="post">{% csrf_token %}
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <span class="wt-select">
+                                                    {{ status_form.status }}
+                                                <button type="submit" class="wt-searchgbtn"><i class="fa fa-check"></i></button>
+                                                </span>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                    <div class="wt-hireduserstatus">
+                                        <h5>&#36;{{ hired_job_proposal.amount }}</h5>
+                                        <span>{{ hired_job_proposal.duration }}</span>
+                                    </div>
+                                    <div class="wt-hireduserstatus">
+                                        <i class="far fa-envelope"></i>
+                                        <span>Cover Letter</span>
+                                    </div>
+                                    <div class="wt-hireduserstatus">
+                                        <i class="fa fa-paperclip"></i>
+                                        <span>03 file attached</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wt-projecthistory">
+                        <div class="wt-tabscontenttitle">
+                            <h2>Job Status Tracker</h2>
+                        </div>
+                        <div class="wt-historycontent">
+                            <ul id="accordion" class="wt-historycontentcol">
+                                <li class="wt-historycolhead">
+                                    <h3><span>Date</span><span>Message</span><span>Attachment</span></h3>
+                                </li>
+                                <li class="collapsed" data-toggle="collapse" data-target="#collapseone">
+                                    <div class="wt-dateandmsg">
+                                        <span><img src="{% static 'images/user/ongoing/img-01.jpg' %}" alt="img description">Jun 27, 2019</span>
+                                        <span></span>
+                                    </div>
+                                    <div class="wt-rightarea wt-msgbtns">
+                                        <a href="javascript:void(0);" class="wt-btn wt-msgbtn"><i class="lnr lnr-chevron-up"></i>Show Issue</a>
+                                        <a href="javascript:void(0);" class="wt-btn wt-attachmentbtn"><i class="lnr lnr-download"></i>Download Attachment</a>
+                                    </div>
+                                </li>
+                                <li class="wt-historydescription collapse" id="collapseone" data-parent="#accordion">
+                                    <div class="wt-description">
+                                        <p>Adipisicing elit sed do eiusmod tempor incididunt ut labore eta dolore magnam aliqua. Ut enim ad minim veniam, qu nostrud exercitation ullamco laboris nisi ut aliquiprex ea commodo consequat eta dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillumau dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident, sunt in culpa quiste officia deserunt mollit anim id est laborum. Sed uten perspiciatis unde omnis istetam natus error sit voluptatem accusantium doloremque laudantium.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <form class="wt-formtheme wt-userform" action="{% url 'company:job_status_tracker' %}" method="post">{% csrf_token %}
+                                <fieldset>
+                                    <div class="form-group">
+                                        {{ issue_form.issue }}
+                                    </div>
+                                    <div class="form-group form-group-label">
+                                        <div class="wt-labelgroup">
+                                            <label for="{{ issue_form.attachment.id_for_label }}">
+                                                <span class="wt-btn"><i class="lnr lnr-file-add"></i></span>
+                                                {{ issue_form.attachment }}
+                                            </label>
+                                            <span>Drop files here to upload</span>
+                                            <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
+                                        </div>
+                                    </div>
+                                    <div class="form-group wt-btnarea">
+                                        <button type="submit" class="wt-btn">Send Now</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Register Form End-->
+
+<div class="wt-uploadimages modal fade" id="wt-projectmodalbox" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="wt-modaldialog modal-dialog" role="document">
+        <div class="wt-modalcontent modal-content">
+            <div class="wt-boxtitle">
+                <h2>Project Status <i class=" wt-btncancel fa fa-times" data-dismiss="modal" aria-label="Close"></i></h2>
+            </div>
+            <div class="wt-modalbody modal-body">
+                <form class="wt-formtheme wt-formfeedback">
+                    <fieldset>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Add Your Feedback*"></textarea>
+                        </div>
+                        <div class="form-group wt-ratingholder">
+                            <div class="wt-ratepoints">
+                                <div class="counter wt-pointscounter">5.0</div>
+                                <div id="wt-jrate" class="wt-jrate"></div>
+                            </div>
+                            <span class="wt-ratingdescription">How was my proffesional behaviour?</span>
+                        </div>
+                        <div class="form-group wt-ratingholder">
+                            <div class="wt-ratepoints">
+                                <div class="counterone wt-pointscounter">5.0</div>
+                                <div id="wt-jrateone" class="wt-jrate"></div>
+                            </div>
+                            <span class="wt-ratingdescription">How was my quality of work?</span>
+                        </div>
+                        <div class="form-group wt-ratingholder">
+                            <div class="wt-ratepoints">
+                                <div class="countertwo wt-pointscounter">5.0</div>
+                                <div id="wt-jratetwo" class="wt-jrate"></div>
+                            </div>
+                            <span class="wt-ratingdescription">Was I focused to deadline?</span>
+                        </div>
+                        <div class="form-group wt-ratingholder">
+                            <div class="wt-ratepoints">
+                                <div class="counterthree wt-pointscounter">5.0</div>
+                                <div id="wt-jratethree" class="wt-jrate"></div>
+                            </div>
+                            <span class="wt-ratingdescription">Was it worth it having my services?</span>
+                        </div>
+                        <div class="form-group wt-btnarea">
+                            <a class="wt-btn" href="javascript:void(0);">Send Feedback</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock dashboard %}

@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% block title %}<title>{{ title }}</title>{% endblock %}
+{% load static %}
+{% load thumbnail %}
+{% load is_following %}
+{% block content %}
+<main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
+    <div class="wt-haslayout wt-main-section">
+        <!-- User Listing Start-->
+        <div class="wt-haslayout">
+            <div class="container">
+                <div class="row">
+                    <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
+                        {% thumbnail company.company_profile.banner '1110x300' crop='center' as company_banner %}
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
+                                <div class="wt-comsingleimg">
+                                    <figure><img src="{{ company_banner.url }}" alt="img description"></figure>
+                                </div>
+                            </div>
+                        {% endthumbnail %}
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
+                            <aside id="wt-sidebar" class="wt-sidebar">
+                                <div class="wt-proposalsr wt-proposalsrvtwo">
+                                    <div class="wt-widgetcontent wt-companysinfo">
+                                        <figure><img src="{{ company.company_profile.logo.url }}" alt="img description"></figure>
+                                        <div class="wt-title">
+                                            {% if company.company_profile.confirmed %}
+                                                <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Verified Company</a>
+                                            {% else %}
+                                                <a href="javascript:void(0);"><i class="fa fa-ban text-danger"></i> UnVerified Company</a>
+                                            {% endif %}
+                                            <h2>{{ company.company_profile.name }}</h2>
+                                        </div>
+                                    </div>
+                                    <div class="tg-authorcodescan">
+                                        <figure class="tg-qrcodeimg">
+                                            <img src="{% static 'images/qrcode.png' %}" alt="img description">
+                                        </figure>
+                                        <div class="tg-qrcodedetail">
+                                            <span class="lnr lnr-laptop-phone"></span>
+                                            <div class="tg-qrcodefeat">
+                                                <h3>Scan with your <span>Smart Phone </span> To Get It Handy.</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if request.user.is_authenticated and request.user.is_freelancer %}
+                                        <div class="wt-clicksavearea">
+    {#                                        <span>Job ID: tQu5DW9F2G</span>#}
+                                            <form method="post" action="{% url 'freelancer:follow_route' %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="company_to_follow" value="{{ company.username }}">
+                                                {% is_following  company request.user as is_follower %}
+                                                {% if not is_follower %}
+                                                    <button type="submit" class="wt-btn"><i class="far fa-heart"></i> Follow</button>
+                                                {% else %}
+                                                    <button type="submit" class="wt-btn"><i class="far fa-heart"></i> UnFollow</button>
+                                                {% endif %}
+                                            </form>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="wt-widget">
+                                    <div class="wt-widgettitle">
+                                        <h2>{{ company.company_profile.name }} Followers</h2>
+                                    </div>
+                                    <div class="wt-widgetcontent wt-comfollowers wt-verticalscrollbar">
+                                        {% if company.company_profile.followers.all %}
+                                            <ul>
+                                                {% for freelancer in company.company_profile.followers.all %}
+                                                    <li>
+                                                        <a href="{% url 'freelancer:detail' username=freelancer.username %}">
+                                                            <span><img src="{{ freelancer.freelancer_profile.avatar.url }}" alt="img description"></span>
+                                                            <span>{{ freelancer.freelancer_profile.get_full_name }}</span>
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% else %}
+                                            <span>No Followers Yet</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="wt-widget wt-sharejob">
+                                    <div class="wt-widgettitle">
+                                        <h2>Share This Company</h2>
+                                    </div>
+                                    <div class="wt-widgetcontent">
+                                        <ul class="wt-socialiconssimple">
+                                            <li class="wt-facebook"><a href="javascript:void(0);"><i class="fab fa-facebook-f"></i>Share on Facebook</a></li>
+                                            <li class="wt-twitter"><a href="javascript:void(0);"><i class="fab fa-twitter"></i>Share on Twitter</a></li>
+                                            <li class="wt-linkedin"><a href="javascript:void(0);"><i class="fab fa-linkedin-in"></i>Share on Linkedin</a></li>
+                                            <li class="wt-googleplus"><a href="javascript:void(0);"><i class="fab fa-google-plus-g"></i>Share on Google Plus</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="wt-widget wt-reportjob">
+                                    <div class="wt-widgettitle">
+                                        <h2>Report This Company</h2>
+                                    </div>
+                                    <div class="wt-widgetcontent">
+                                        <form class="wt-formtheme wt-formreport">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <span class="wt-select">
+                                                        <select>
+                                                            <option>Select Reason</option>
+                                                        </select>
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <textarea class="form-control" placeholder="Description"></textarea>
+                                                </div>
+                                                <div class="form-group wt-btnarea">
+                                                    <a href="javascrip:void(0);" class="wt-btn">Submit</a>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </aside>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
+                            <div class="wt-userlistingholder wt-haslayout">
+                                <div class="wt-comcontent">
+                                    <div class="wt-title">
+                                        <h3>About “{{ company.company_profile.name }}”</h3>
+                                    </div>
+                                    <div class="wt-description">
+                                        <p>{{ company.company_profile.description }}</p>
+                                    </div>
+                                </div>
+                                {% if jobs %}
+                                    {% for job in jobs %}
+                                        <div class="wt-userlistinghold wt-featured wt-userlistingholdvtwo">
+                                        <span class="wt-featuredtag"><img src="{% static 'images/featured.png' %}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                        <div class="wt-userlistingcontent">
+                                            <div class="wt-contenthead">
+                                                <div class="wt-title">
+                                                    <a href="{{ job.category.get_absolute_url }}"><i class="fa fa-folder"></i> {{ job.category }}</a>
+                                                    <h2>{{ job.title }}</h2>
+                                                </div>
+                                                <div class="wt-description">
+                                                    <p>{{ job.description }}</p>
+                                                </div>
+                                                <div class="wt-tag wt-widgettag">
+                                                    {% for skill in job.skills.all %}
+                                                        <a href="{{ skill.get_absolute_url }}">{{ skill }}</a>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            <div class="wt-viewjobholder">
+                                                <ul>
+                                                    <li><span><i class="fa fa-dollar-sign wt-viewjobdollar"></i>{{ job.job_type }}</span></li>
+                                                    <li><span><em><img src="{% static 'images/flag/img-04.png' %}" alt="img description"></em>{{ job.country }}</span></li>
+                                                    <li><span><i class="far fa-folder wt-viewjobfolder"></i>Type: Per Hour</span></li>
+                                                    <li><span><i class="far fa-clock wt-viewjobclock"></i>Duration: {{ job.duration }}</span></li>
+                                                    <li><span><i class="fa fa-tag wt-viewjobtag"></i>Job ID: gy3yV2Vm5u</span></li>
+                                                    <li><a href="javascript:void(0);" class="wt-clicklike wt-clicksave"><i class="fa fa-heart"></i> Save</a></li>
+                                                    <li class="wt-btnarea"><a href="{{ job.get_absolute_url }}" class="wt-btn">View Job</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <nav class="wt-pagination">
+                                            {% include 'partials/pagination.html' %}
+                                        </nav>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- User Listing End-->
+    </div>
+</main>
+{% endblock content %}

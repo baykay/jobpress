@@ -1,0 +1,103 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+{% block  title %}<title>Company Dashboard</title>{% endblock title %}
+{% block dashboard %}
+    <section class="wt-haslayout wt-dbsectionspace">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
+                {% include 'partials/messages.html' %}
+                <div class="wt-dashboardbox">
+                    <div class="wt-dashboardboxtitle">
+                        <h2>{{ user.company_profile.name | title }}</h2>
+                    </div>
+                    <div class="wt-dashboardboxcontent wt-jobdetailsholder">
+                        <div class="wt-freelancerholder">
+                            <div class="wt-tabscontenttitle">
+                                <h2>{{ user.company_profile.name }} Posted Jobs</h2>
+                            </div>
+                            <div class="wt-managejobcontent wt-verticalscrollbar">
+                                {% for company_job in company_jobs %}
+                                    <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
+                                        <span class="wt-featuredtag"><img src="{% static 'images/featured.png' %}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                        <div class="wt-userlistingcontent">
+                                            <div class="wt-contenthead">
+                                                <div class="wt-title">
+                                                    <a href="{% url 'jobs:job_detail' slug=company_job.slug %}"><i class="fa fa-eye"></i> View on site</a>
+                                                    <h2>{{ company_job.title }} </h2>
+                                                </div>
+                                                <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
+                                                    <li><span class="wt-dashboraddoller"><i class="fa fa-dollar-sign"></i> {{ company_job.job_type }}</span></li>
+                                                    <li><span><img src="{% static 'images/flag/img-04.png' %}" alt="img description"> {{ company_job.country }}</span></li>
+                                                    <li><a href="{% url 'jobs:jobs_categories_list' slug=company_job.category.slug %}" class="wt-clicksavefolder"><i class="far fa-folder"></i> Type: {{ company_job.category }}</a></li>
+                                                    <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: {{ company_job.duration }}</span></li>
+                                                </ul>
+                                            </div>
+                                            <div class="wt-rightarea">
+                                                <div class="wt-btnarea">
+                                                    <a href="{% url 'company:per_job_proposals' slug=company_job.slug %}" class="wt-btn">VIEW DETAILS</a>
+                                                </div>
+                                                <div class="wt-hireduserstatus">
+                                                    <h4>{{ company_job.proposals_set.count }}</h4><span>Proposals</span>
+                                                    <ul class="wt-hireduserimgs">
+                                                        <li><figure><img src="{% static 'images/user/userlisting/img-05.jpg' %}" alt="img description"></figure></li>
+                                                        <li><figure><img src="{% static 'images/user/userlisting/img-01.jpg' %}" alt="img description"></figure></li>
+                                                        <li><figure><img src="{% static 'images/user/userlisting/img-02.jpg' %}" alt="img description"></figure></li>
+                                                        <li><figure><img src="{% static 'images/user/userlisting/img-03.jpg' %}" alt="img description"></figure></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="wt-pagination wt-savepagination">
+                        {% include 'partials/pagination.html' %}
+                    </nav>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-3">
+                <aside id="wt-sidebar" class="wt-sidebar wt-dashboardsave">
+                    <div class="wt-proposalsr">
+                        <div class="wt-proposalsrcontent">
+                            <figure>
+                                <img src="{% static 'images/thumbnail/img-17.png' %}" alt="image">
+                            </figure>
+                            <div class="wt-title">
+                                <h3>{{ company_jobs.count }}</h3>
+                                <span>Total Ongoing Jobs</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wt-proposalsr">
+                        <div class="wt-proposalsrcontent wt-componyfolow">
+                            <figure>
+                                <img src="{% static 'images/thumbnail/img-16.png' %}" alt="image">
+                            </figure>
+                            <div class="wt-title">
+                                <h3>1406</h3>
+                                <span>Total Completed Jobs</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wt-proposalsr">
+                        <div class="wt-proposalsrcontent  wt-freelancelike">
+                            <figure>
+                                <img src="{% static 'images/thumbnail/img-15.png' %}" alt="image">
+                            </figure>
+                            <div class="wt-title">
+                                <h3>2075</h3>
+                                <span>Total Cancelled Jobs</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <div class="wt-companyad">
+                    <figure class="wt-companyadimg"><img src="{% static 'images/add-img.jpg' %}" alt="img description"></figure>
+                    <span>Advertisement  255px X 255px</span>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock dashboard %}

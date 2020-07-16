@@ -1,0 +1,52 @@
+{% extends 'dashboard_base.html' %}
+{% block title %} <title>Delete Account</title>{% endblock title %}
+{% block dashboard %}
+<section class="wt-haslayout wt-dbsectionspace">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 m-auto">
+            {% include 'partials/messages.html' %}
+            <div class="wt-dashboardbox wt-dashboardtabsholder wt-accountsettingholder">
+                <div class="wt-dashboardtabs">
+                    <ul class="wt-tabstitle nav navbar-nav">
+                        <li class="nav-item">
+                            <a class="active" data-toggle="tab" href="#wt-security">Delete Account</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="wt-tabscontent tab-content">
+                    <div class="wt-securityhold tab-pane active fade show" id="wt-security">
+                        <div class="wt-accountdel">
+                            <div class="wt-tabscontenttitle">
+                                <h2>{{ user.email }}... are you sure to <strong>"DELETE YOUR ACCOUNT"</strong>?</h2>
+                            </div>
+                            <form class="wt-formtheme wt-userform" method="post">
+                                {% csrf_token %}
+                                <fieldset>{{ form.errors }}
+                                    <div class="form-group form-group-half">
+                                        {{ form.password }}
+                                    </div>
+                                    <div class="form-group form-group-half">
+                                        {{ form.reason }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.description }}
+                                    </div>
+                                    <div class="form-group form-group-half float-right">
+                                        <span class="wt-checkbox">
+                                            {{ form.unsubscribe }}
+                                            <label for="{{ form.unsubscribe.id_for_label }}"><span>{{ form.unsubscribe.label }}</span></label>
+                                        </span>
+                                    </div>
+                                    <div class="form-group form-group-half wt-btnarea">
+                                        <button type="submit" class="wt-btn">Yes Delete Account</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock dashboard %}

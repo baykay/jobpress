@@ -1,0 +1,103 @@
+{% extends 'dashboard_base.html' %}
+{% load thumbnail %}
+{% block title %}
+<title>
+    {{ title }}
+</title>
+{% endblock title %}
+{% block style %}
+    {{ block.super }}
+{% endblock style %}
+{% load static %}
+{% block dashboard %}
+    <!--Register Form Start-->
+    {% include 'partials/messages.html' %}
+    <section class="wt-haslayout wt-dbsectionspace">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-right">
+                <div class="wt-dashboardbox">
+                    <div class="wt-dashboardboxcontent">
+                        <form class="wt-formtheme wt-formprojectinfo wt-formcategory" method="post">{% csrf_token %}
+                            <fieldset>
+                                <div class="wt-jobskills wt-tabsinfo">
+                                    <div class="wt-tabscontenttitle">
+                                        <h2>Are you sure to delete {{ post_to_delete }}</h2>
+                                    </div>
+                                    <div class="wt-description">
+                                        <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua aut enim ad minim veniamac quis nostrud exercitation ullamco laboris.</p>
+                                    </div>
+                                </div>
+                                <div class="form-group wt-btnarea">
+                                    <button type="submit" class="wt-btn">Yes am sure...</button>
+                                    <a href="{% url 'blog:article_management' %}">No Don't Delete</a>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
+                <div class="wt-dashboardbox wt-categorys">
+                    <div class="wt-dashboardboxtitle wt-titlewithsearch">
+                        <h2>Posted Articles</h2>
+                        <form class="wt-formtheme wt-formsearch">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input type="text" name="search" value="{{ request.GET.search }}" class="form-control" placeholder="Search Article">
+                                    <button type="submit" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="wt-dashboardboxcontent wt-categoriescontentholder">
+                        {% if article_lists %}
+                            <table class="wt-tablecategories">
+                                <thead>
+                                    <tr>
+                                        <th>Views</th>
+                                        <th>Title</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for article in article_lists %}
+                                        <tr>
+                                            <td>{{ article.views_count }}</td>
+                                            <td>{{ article.title | truncatewords:8 }}</td>
+                                            <td>
+                                                <div class="wt-actionbtn">
+                                                    <a href="{% url 'blog:article_update' article.slug %}" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
+                                                    <a href="{% url 'blog:article_delete' article.slug %}" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                                    <a href="{% url 'blog:article_detail' article.slug %}" class="wt-addinfo"><i class="lnr lnr-eye"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                        {% endif %}
+                        <nav class="wt-pagination">
+                            {% include 'partials/pagination.html' %}
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!--Register Form End-->
+{% endblock dashboard %}
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static 'js/jquery.basictable.min.js' %}"></script>
+    <script>
+        const menu_icon = document.querySelector('.menu-icon');
+        function addClassFunThree() {
+            this.classList.toggle("click-menu-icon");
+        }
+        menu_icon.addEventListener('click', addClassFunThree);
+        $('.wt-tablecategories').basictable({
+            breakpoint: 640,
+        });
+    </script>
+{% endblock scripts %}

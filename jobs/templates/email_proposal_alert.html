@@ -1,0 +1,3 @@
+{% autoescape off %}
+<a href="http://{{ current_site }}{% url 'freelancer:detail' username=proposed_user.username %}"> {{ proposed_user.freelancer_profile.get_full_name }} </a> Made a proposal on your job listing <a href="http://{{ current_site }}{% url 'company:per_job_proposals' slug=proposed_job.slug %}"> {{ proposed_job.title }}</a>
+{% endautoescape %}

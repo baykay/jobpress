@@ -1,0 +1,3 @@
+{% autoescape off %}
+<a href="http://{{ current_site }}{% url 'company:company_detail' username=offering_company.username %}"> {{ offering_company.company_profile.name }} </a> Offered a Job to you <em><a href="http://{{ current_site }}{% url 'jobs:job_detail' slug=offering_job.slug %}"> {{ offering_job.title }}</a></em>
+{% endautoescape %}

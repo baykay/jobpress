@@ -1,0 +1,151 @@
+<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
+    <aside id="wt-sidebar" class="wt-sidebar">
+        {% if 'jobs/categories' not in request.path  %}
+        <div class="wt-widget wt-effectiveholder">
+            <div class="wt-widgettitle">
+                <h2>Jobs By Categories</h2>
+            </div>
+            <div class="wt-widgetcontent">
+                <form class="wt-formtheme wt-formsearch">
+                    <fieldset>
+                        <div class="form-group">
+                            {{ form.search_by_category }}
+                        </div>
+                        <button type="submit" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></button>
+                    </fieldset>
+                    <fieldset>
+                        <div class="wt-jobskills wt-tabsinfo">
+                            <div class="form-group">
+                                {{ form.select_by_category }}
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+        <div class="wt-widget wt-effectiveholder">
+            <div class="wt-widgettitle">
+                <h2>Jobs By Type</h2>
+            </div>
+            <div class="wt-widgetcontent">
+                <form class="wt-formtheme wt-formsearch">
+                    <fieldset>
+                        <div class="wt-checkboxholder wt-verticalscrollbar">
+                            {% for item in form.select_by_job_type %}
+                                <span class="wt-radio">
+                                    {{ item.tag }}
+                                    <label for="{{ item.id_for_label }}">{{ item.choice_label }}</label>
+                                </span>
+                            {% endfor %}
+                        </div>
+                    <button type="submit" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        {% if 'jobs/departments' not in request.path %}
+        <div class="wt-widget wt-effectiveholder">
+            <div class="wt-widgettitle">
+                <h2>Jobs By Departments</h2>
+            </div>
+            <div class="wt-widgetcontent">
+                <form class="wt-formtheme wt-formsearch">
+                    <fieldset>
+                        <div class="form-group">
+                            {{ form.search_by_department }}
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="wt-checkboxholder wt-verticalscrollbar">
+                            {% for item in form.select_by_department %}
+                                <span class="wt-checkbox">
+                                    {{ item.tag }}
+                                    <label for="{{ item.id_for_label }}">{{ item.choice_label }}</label>
+                                </span>
+                            {% endfor %}
+                        </div>
+                        <button type="submit" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+        {% if 'jobs/skills' not in request.path  %}
+        <div class="wt-widget wt-effectiveholder">
+            <div class="wt-widgettitle">
+                <h2>Jobs By Skills Required</h2>
+            </div>
+            <div class="wt-widgetcontent">
+                <form class="wt-formtheme wt-formsearch">
+                    <fieldset>
+                        <div class="wt-checkboxholder wt-verticalscrollbar">
+                            {% for item in form.select_by_skills %}
+                                <span class="wt-checkbox">
+                                    {{ item.tag }}
+                                    <label for="{{ item.id_for_label }}">{{ item.choice_label }}</label>
+                                </span>
+                            {% endfor %}
+                        </div>
+                        <button type="submit" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+        <div class="wt-widget wt-effectiveholder">
+            <div class="wt-widgettitle">
+                <h2>Jobs By Project Duration</h2>
+            </div>
+            <div class="wt-widgetcontent">
+                <form class="wt-formtheme wt-formsearch">
+                    <fieldset>
+                        <div class="wt-checkboxholder wt-verticalscrollbar">
+                            {% for item in form.select_by_duration %}
+                                <span class="wt-radio">
+                                    {{ item.tag }}
+                                    <label for="{{ item.id_for_label }}">{{ item.choice_label }}</label>
+                                </span>
+                            {% endfor %}
+                        </div>
+                    <button type="submit" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        {% if 'jobs/countries' not in request.path %}
+        <div class="wt-widget wt-effectiveholder">
+            <div class="wt-widgettitle">
+                <h2>Jobs By Country</h2>
+            </div>
+            <div class="wt-widgetcontent">
+                <form class="wt-formtheme wt-formsearch">
+                    <fieldset>
+                        <div class="form-group">
+                            {{ form.search_by_country }}
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="wt-checkboxholder wt-verticalscrollbar">
+                            {% for item in form.select_by_country %}
+                                <span class="wt-radio">
+                                    {{ item.tag }}
+                                    <label for="{{ item.id_for_label }}">{{ item.choice_label }}</label>
+                                </span>
+                            {% endfor %}
+                        </div>
+                    <button type="submit" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+        <div class="wt-widget wt-effectiveholder">
+            <div class="wt-widgetcontent">
+                <div class="wt-applyfilters">
+                    <span>Click the <i class="lnr lnr-magnifier"></i> icon on each section to apply latest<br> changes made by you.</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>

@@ -1,0 +1,39 @@
+{% load static %}
+<!doctype html>
+
+<html class="no-js" lang="">
+<head>
+    {% block title %}<title></title>{% endblock %}
+    {% block style %}
+        {% include 'partials/stylesheet.html' %}
+    {% endblock %}
+</head>
+<body {% if not user.is_authenticated %}class="" {% else %}class="wt-login"{% endif %}>
+{#	<!-- Preloader Start -->#}
+{#	<div class="preloader-outer">#}
+{#		<div class=n"loader"></div>#}
+{#	</div>#}
+{#	<!-- Preloader End -->#}
+	<!-- Wrapper Start -->
+	<div id="wt-wrapper" class="wt-wrapper wt-haslayout">
+		<!-- Content Wrapper Start -->
+		<div class="wt-contentwrapper">
+			<!-- Header Start -->
+			{% include 'partials/navbar.html' %}
+            <!--Navbar Ends Here-->
+            {% block content %}
+            {% endblock content %}
+            <!--Main Content Ends Here-->
+
+			<!--Footer Start-->
+                {% include 'partials/footer.html' %}
+			<!--Footer End-->
+		</div>
+		<!--Content Wrapper End-->
+	</div>
+	<!--Wrapper End-->
+    {% include 'partials/scripts.html' %}
+</body>
+</html>
+
+

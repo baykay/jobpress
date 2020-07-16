@@ -1,0 +1,50 @@
+{% extends 'filteristings_base.html' %}
+
+{% block title %}
+    <title>Jobs By Account</title>
+{% endblock %}
+
+{% block filter %}
+    {% for account in accounts %}
+        <div class="wt-userlistinghold">
+            <figure class="wt-userlistingimg">
+                <img src="{{ account.image.url }}" alt="image description">
+            </figure>
+            <div class="wt-userlistingcontent">
+                <div class="wt-contenthead">
+                    <div class="wt-title">
+                        <a href="{{ account.get_absolute_url }}"><i class="fa fa-eye"></i> View All Jobs</a>
+                        <h2>{{ account.title }} Account Jobs</h2>
+                    </div>
+                    <ul class="wt-userlisting-breadcrumb">
+                        <li><span><i class="far fa-money-bill-alt"></i> $44.00 / hr</span></li>
+                        <li><span><img src="" alt="img description"> Country</span></li>
+                        <li><a href="javascript:void(0);"><i class="fa fa-heart"></i> Click to Save</a></li>
+                    </ul>
+                </div>
+                <div class="wt-rightarea">
+                    <span class="wt-starsvtwo">
+                        <i class="fa fa-star fill"></i>
+                        <i class="fa fa-star fill"></i>
+                        <i class="fa fa-star fill"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </span>
+                    <span class="wt-starcontent">{{ account.jobslistings_set.count }}<em>Related Jobs</em></span>
+                </div>
+            </div>
+            <div class="wt-description">
+                <p>{{ account.description | capfirst }}</p>
+            </div>
+            <div class="wt-tag wt-widgettag">
+                <a href="javascript:void(0);">PHP</a>
+                <a href="javascript:void(0);">HTML</a>
+                <a href="javascript:void(0);">JavaScript</a>
+                <a href="javascript:void(0);">WordPress</a>
+            </div>
+        </div>
+    {% endfor %}
+    <nav class="wt-pagination">
+        {% include 'partials/pagination.html' %}
+    </nav>
+{% endblock %}

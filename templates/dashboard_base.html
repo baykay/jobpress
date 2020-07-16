@@ -1,0 +1,250 @@
+{% load thumbnail %}
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+	<meta charset="utf-8">
+	{% block title %}<title></title>{% endblock %}
+    {% block style %}
+        {% include 'partials/stylesheet.html' %}
+    {% endblock %}
+</head>
+<body {% if not user.is_authenticated %}class="" {% else %}class="wt-login"{% endif %}>
+	<!-- Preloader Start -->
+{#	<div class="preloader-outer">#}
+{#		<div class="loader"></div>#}
+{#	</div>#}
+	<!-- Preloader End -->
+	<!-- Wrapper Start -->
+	<div id="wt-wrapper" class="wt-wrapper wt-haslayout">
+		<!-- Content Wrapper Start -->
+		<div class="wt-contentwrapper">
+			<!-- Header Start -->
+			{% include 'partials/navbar.html' %}
+			<!--Header End-->
+			<!--Main Start-->
+        <main id="wt-main" class="wt-main wt-haslayout">
+            <div id="wt-sidebarwrapper" class="wt-sidebarwrapper">
+                <div id="wt-btnmenutoggle" class="wt-btnmenutoggle">
+                    <span class="menu-icon">
+                        <em></em>
+                        <em></em>
+                        <em></em>
+                    </span>
+                </div>
+                <div id="wt-verticalscrollbar" class="wt-verticalscrollbar mCustomScrollbar _mCS_1">
+                    <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
+                        style="max-height: none;">
+                        <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y"
+                            style="position:relative; top:0; left:0;" dir="ltr">
+                            <div class="wt-companysdetails wt-usersidebar">
+                                <figure class="wt-companysimg">
+                                    {% if user.is_company %}
+                                        {% thumbnail user.company_profile.banner "270x150" crop="center" as company_profile %}
+                                            <img alt="{{ user.company_profile.name }}"
+                                                 src="{{ company_profile.url }}"
+                                                 width="{{ company_profile.x }}"
+                                                 height="{{ company_profile.y }}">
+                                        {% endthumbnail %}
+                                    {% else %}
+                                        {% thumbnail user.freelancer_profile.banner "270x150" crop="center" as freelancer_profile %}
+                                            <img alt="{{ user.freelancer_profile.name }}"
+                                                 src="{{ freelancer_profile.url }}"
+                                                 width="{{ freelancer_profile.x }}"
+                                                 height="{{ freelancer_profile.y }}">
+                                        {% endthumbnail %}
+                                    {% endif %}
+                                </figure>
+                                <div class="wt-companysinfo">
+                                    <figure>
+                                        {% if user.is_company %}
+                                            {% thumbnail user.company_profile.logo "150x150" crop="center" as company_profile %}
+                                                <img alt="{{ user.company_profile.name }}"
+                                                     src="{{ company_profile.url }}"
+                                                     width="{{ company_profile.x }}"
+                                                     height="{{ company_profile.y }}">
+                                            {% endthumbnail %}
+                                        {% else %}
+                                            {% thumbnail user.freelancer_profile.avatar "150x150" crop="center" as company_profile %}
+                                            <img alt="{{ user.company_profile.name }}"
+                                                 src="{{ company_profile.url }}"
+                                                 width="{{ company_profile.x }}"
+                                                 height="{{ company_profile.y }}">
+                                        {% endthumbnail %}
+                                        {% endif %}
+                                    </figure>
+                                    <div class="wt-title">
+                                        <h2><a href="javascript:void(0);">{{ user.companyprofile.name | title }}</a></h2>
+                                        <span>{{ user.companyprofile.tagline }}</span>
+                                    </div>
+                                    {% if request.user.is_company %}
+                                        <div class="wt-btnarea"><a href="{% url 'company:postjob' %}" class="wt-btn">Post a Job</a></div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <nav id="wt-navdashboard" class="wt-navdashboard">
+                                <ul>
+                                    <li class="menu-item-has-children"><span class="wt-dropdowarrow"><i
+                                                class="lnr lnr-chevron-right"></i></span>
+                                        <a href="javascript:void(0);">
+                                            <i class="ti-dashboard"></i>
+                                            <span>Insights</span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            {% if request.user.is_company %}
+                                            <li>
+                                                <hr><a href="{% url 'company:statistics' %}">Statistics</a>
+                                            </li>
+                                            {% endif %}
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children"><span class="wt-dropdowarrow"><i
+                                                class="lnr lnr-chevron-right"></i></span>
+                                        <a href="javascript:void(0);">
+                                            <i class="ti-package"></i>
+                                            <span>All Jobs</span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li>
+                                                <hr><a href="{% url 'company:completed_jobs' %}">Completed Jobs</a></li>
+                                            <li>
+                                                <hr><a href="{% url 'company:manage_jobs' %}">Manage Jobs</a></li>
+                                            <li>
+                                                <hr><a href="{% url 'company:hired_on_going_jobs' %}">Hired Jobs</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children"><span class="wt-dropdowarrow"><i
+                                                class="lnr lnr-chevron-right"></i></span>
+                                        <a href="javascript:void(0);">
+                                            <i class="ti-package"></i>
+                                            <span>Blog</span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li>
+                                                <hr><a href="{% url 'blog:article_list' %}">Articles</a></li>
+                                            <li>
+                                                <hr><a href="{% url 'blog:article_management' %}">Manage Articles</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="wt-notificationicon menu-item-has-children"><span class="wt-dropdowarrow"><i
+                                                class="lnr lnr-chevron-right"></i></span>
+                                        <a href="javascript:void(0);">
+                                            <i class="ti-pencil-alt"></i>
+                                            <span>Messages</span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li>
+                                                <hr><a href="dashboard-messages.html">Messages</a></li>
+                                            <li>
+                                                <hr><a href="dashboard-messages2.html">Messages V 2</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="dashboard-saveitems.html">
+                                            <i class="ti-heart"></i>
+                                            <span>My Saved Items</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="dashboard-invocies.html">
+                                            <i class="ti-file"></i>
+                                            <span>Invoices</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="dashboard-category.html">
+                                            <i class="ti-layers"></i>
+                                            <span>Category</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="dashboard-packages.html">
+                                            <i class="ti-money"></i>
+                                            <span>Packages</span>
+                                        </a>
+                                    </li>
+                                    {% if user.is_freelancer %}
+                                        <li class="menu-item-has-children"><span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
+                                    {% else %}
+                                        <li>
+                                    {% endif %}
+                                        <a class="wt-btndisbaled"><i class="ti-pencil-alt"></i><span>Update Profile</span></a>
+                                            <ul class="sub-menu">
+                                                {% if user.is_company %}
+                                                <li>
+                                                    <hr><a href="{% url 'company:profile' %}">Profile</a></li>
+                                                {% else %}
+                                                <li>
+                                                    <hr><a href="{% url 'freelancer:profile' %}">My Profile</a></li>
+                                                <li>
+                                                    <hr><a href="{% url 'freelancer:awards' %}">Awards</a></li>
+                                                <li>
+                                                    <hr><a href="{% url 'freelancer:projects' %}">Projects</a></li>
+                                            </ul>
+                                        {% endif %}
+                                    </li>
+                                    <li class="menu-item-has-children"><span class="wt-dropdowarrow"><i
+                                                class="lnr lnr-chevron-right"></i></span>
+                                        <a class="wt-btndisbaled">
+                                            <i class="ti-package"></i>
+                                            <span>Account Settings</span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li>
+                                                <hr><a href="{% url 'accounts:details' %}">Account Detail Settings</a></li>
+                                            <li>
+                                                <hr><a href="{% url 'accounts:change_password' %}">Change Password</a></li>
+                                            <li>
+                                                <hr><a href="{% url 'accounts:email_notification' %}">Email Notification</a></li>
+                                            <li>
+                                                <hr><a href="{% url 'accounts:delete_account' %}">Delete Account</a></li>
+                                            <li>
+                                                <hr><a href="{% url 'accounts:account_settings' %}">Account Settings</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'accounts:help_support' %}">
+                                            <i class="ti-tag"></i>
+                                            <span>Help &amp; Support</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'accounts:logout' %}">
+                                            <i class="ti-shift-right"></i>
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <div class="wt-navdashboard-footer">
+                                <span>Worktern. © 2019 All Rights Reserved.</span>
+                            </div>
+                        </div>
+                        <div id="mCSB_1_scrollbar_vertical"
+                            class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical"
+                            style="display: none;">
+                            <div class="mCSB_draggerContainer">
+                                <div id="mCSB_1_dragger_vertical" class="mCSB_dragger"
+                                    style="position: absolute; min-height: 30px; display: block; height: 0px; max-height: 275px; top: 0px;">
+                                    <div class="mCSB_dragger_bar" style="line-height: 30px;"></div>
+                                </div>
+                                <div class="mCSB_draggerRail"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			{% block dashboard %}
+			{% endblock dashboard %}
+			<!--Main End-->
+        </main>
+        </div>
+		<!--Content Wrapper End-->
+	</div>
+	<!--Wrapper End-->
+    {% block scripts %}
+        {% include 'partials/scripts.html' %}
+    {% endblock  %}
+</body>
+
+</html>

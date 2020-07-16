@@ -1,0 +1,198 @@
+<!doctype html>
+<html class="no-js" lang="">
+{% load static %}
+<head>
+    {% block title %}<title>{{ title }}</title>{% endblock %}
+    {% include 'partials/stylesheet.html' %}
+</head>
+<body {% if not user.is_authenticated %}class="" {% else %}class="wt-login"{% endif %}>
+	<!-- Preloader Start -->
+{#	<div class="preloader-outer">#}
+{#		<div class="loader"></div>#}
+{#	</div>#}
+	<!-- Preloader End -->
+	<!-- Wrapper Start -->
+	<div id="wt-wrapper" class="wt-wrapper wt-haslayout">
+		<!-- Content Wrapper Start -->
+		<div class="wt-contentwrapper">
+			<!-- Header Start -->
+			{% include 'partials/navbar.html' %}
+			<!--Header End-->
+			<!--Main Start-->
+			<main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
+				<div class="wt-haslayout wt-main-section">
+					<!-- User Listing Start-->
+					<div class="wt-haslayout">
+						<div class="container">
+							<div class="row">
+								<div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
+									{% include 'snippets/sidebar.html' %}
+									<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
+										<div class="wt-userlistingholder wt-haslayout">
+											<div class="wt-userlistingtitle">
+												<span>{{ search_queryset.count }} - {{ page_obj.end_index }} of {% if request.GET.searchtype == 'company' %}{{ total_company_count.count }}{% elif request.GET.searchtype == 'job' %}{{ total_job_count.count }}{% else %}{{ total_freelancer_count.count }}{% endif %} result{{ search_queryset.count|pluralize }} found for <em>"{{ request.GET.title }}"</em></span>
+											</div>
+											<div class="wt-filterholder">
+												<ul class="wt-filtertag">
+													<li class="wt-filtertagclear">
+														<a href="javascrip:void(0)"><i class="fa fa-times"></i> <span>Clear All Filter</span></a>
+													</li>
+												 	<li class="alert alert-dismissable fade in">
+														<a href="javascrip:void(0)"><i class="fa fa-times close" data-dismiss="alert" aria-label="close"></i> <span>Graphic Design</span></a>
+													</li>
+													<li class="alert alert-dismissable fade in">
+														<a href="javascrip:void(0)"><i class="fa fa-times close" data-dismiss="alert" aria-label="close"></i> <span>Any Hourly Rate</span></a>
+													</li>
+													<li class="alert alert-dismissable fade in">
+														<a href="javascrip:void(0)"><i class="fa fa-times close" data-dismiss="alert" aria-label="close"></i> <span>Any Freelancer Type</span></a>
+													</li>
+													<li class="alert alert-dismissable fade in">
+														<a href="javascrip:void(0)"><i class="fa fa-times close" data-dismiss="alert" aria-label="close"></i> <span>Chinese</span></a>
+													</li>
+													<li class="alert alert-dismissable fade in">
+														<a href="javascrip:void(0)"><i class="fa fa-times close" data-dismiss="alert" aria-label="close"></i> <span>English</span></a>
+													</li>
+												</ul>
+											</div>
+                                            {% if request.GET.searchtype == 'company' %}
+                                                {% for company in search_queryset %}
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                                                        <div class="wt-companysdetails">
+                                                            <figure class="wt-companysimg">
+                                                                <img src="{{ company.banner.url }}" alt="img description">
+                                                            </figure>
+                                                            <div class="wt-companysinfo">
+                                                                <figure><img src="{{ company.logo.url }}" alt="img description"></figure>
+                                                                <div class="wt-title">
+                                                                    {% if company.confirmed %}
+                                                                        <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Verified Company</a>
+                                                                    {% else %}
+                                                                        <a href="javascript:void(0);"><i class="fa fa-ban text-danger"></i> UnVerified Company</a>
+                                                                    {% endif %}
+                                                                    <h2>{{ company.name }}</h2>
+                                                                </div>
+                                                                <ul class="wt-postarticlemeta">
+                                                                    <li>
+                                                                        <a href="javascript:void(0);">
+                                                                            <span>Open Jobs</span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="{% url 'company:company_detail' username=company.user.username %}">
+                                                                            <span>Full Profile</span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li class="wt-following">
+                                                                        <a href="javascript:void(0);">
+                                                                            <span>Following</span>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            {% elif request.GET.searchtype == 'freelancer' %}
+                                                {% for freelancer in search_queryset %}
+                                                    <div class="wt-userlistinghold">
+                                                        <figure class="wt-userlistingimg">
+                                                            <img src="{{ freelancer.avatar.url }}" alt="image description">
+                                                        </figure>
+                                                        <div class="wt-userlistingcontent">
+                                                            <div class="wt-contenthead">
+                                                                <div class="wt-title">
+                                                                    <a href="{% url 'company:company_detail' username=freelancer.user.username %}"><i class="fa fa-user"></i> {{ freelancer.get_full_name}}</a>
+                                                                    <h2>{{ freelancer.profession }}</h2>
+                                                                </div>
+                                                                <ul class="wt-userlisting-breadcrumb">
+                                                                    <li><span><i class="far fa-money-bill-alt"></i> ${{ freelancer.hire_rate }} / hr</span></li>
+                                                                    <li><span><img src="{% static 'images/flag/img-02.png' %}" alt="img description"> {{ freelancer.country }}</span></li>
+                                                                    <li><a href="javascript:void(0);"><i class="fa fa-heart"></i> Click to Save</a></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="wt-rightarea">
+                                                                <span class="wt-starsvtwo">
+                                                                    <i class="fa fa-star fill"></i>
+                                                                    <i class="fa fa-star fill"></i>
+                                                                    <i class="fa fa-star fill"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                </span>
+                                                                {% if freelancer.confirmed %}
+                                                                    <span class="wt-starcontent"><i class="fa fa-user-circle-o"></i><em>Verified</em></span>
+                                                                {% else %}
+                                                                    <span class="wt-starcontent"><i class="fa fa-user-secret"></i><em>UnVerified</em></span>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="wt-description">
+                                                            <p>{{ freelancer.description | capfirst | truncatewords:40 }}</p>
+                                                        </div>
+                                                        <div class="wt-tag wt-widgettag">
+                                                            {% for interest in freelancer.interests.all %}
+                                                                <a href="{{ interest.get_absolute_url }}">{{ interest }}</a>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            {% else %}
+                                                {% for job in search_queryset %}
+											        <div class="wt-userlistinghold wt-featured wt-userlistingholdvtwo">
+                                                        <span class="wt-featuredtag"><img src="{% static 'images/featured.png' %}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                                        <div class="wt-userlistingcontent">
+                                                            <div class="wt-contenthead">
+                                                                <div class="wt-title">
+                                                                    <a href="{{ job.company.get_absolute_url }}"><i class="fa fa-industry "></i> {{ job.company.company_profile.name }}</a>
+                                                                    <h2>{{ job.title | title }}</h2>
+                                                                    <h2><small>{{ job.category }}</small></h2>
+                                                                </div>
+                                                                <div class="wt-description">
+                                                                    <p>{{ job.description | truncatewords:50 }}</p>
+                                                                </div>
+                                                                <div class="wt-tag wt-widgettag">
+                                                                    {% for skill in job.skills.all %}
+                                                                        <a href="{% url 'jobs:jobs_skills_list' slug=skill.slug %}">{{ skill }}</a>
+                                                                    {% endfor %}
+                                                                </div>
+                                                            </div>
+                                                            <div class="wt-viewjobholder">
+                                                                <ul>
+                                                                    <li><span><i class="fa fa-dollar-sign wt-viewjobdollar"></i>{{ job.membership | title }}</span></li>
+                                                                    <li><span><em><img src="{% static 'images/flag/img-01.png' %}" alt="img description"></em>{{ job.country | title }}</span></li>
+                                                                    <li><span><i class="far fa-folder wt-viewjobfolder"></i>Type: {{ job.job_type }}</span></li>
+                                                                    <li><span><i class="far fa-clock wt-viewjobclock"></i>Duration: {{ job.duration | title }}</span></li>
+                                                                    <li><span><i class="fa fa-tag wt-viewjobtag"></i>Job ID: gy3yV2Vm5u</span></li>
+                                                                    <li><span><i class="fa fa-balance-scale wt-viewjobtag"></i>Account Type: <small>{{ job.account_type }}</small></span></li>
+                                                                    <li><a href="javascript:void(0);" class="wt-clicklike"><i class="fa fa-heart"></i> Click to Save</a></li>
+                                                                    <li class="wt-btnarea"><a href="{{ job.get_absolute_url }}" class="wt-btn">View Job</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+											<nav class="wt-pagination">
+												{% include 'partials/pagination.html' %}
+											</nav>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- User Listing End-->
+				</div>
+			</main>
+			<!--Main End-->
+			<!--Footer Start-->
+			{% include 'partials/footer.html' %}
+			<!--Footer End-->
+		</div>
+		<!--Content Wrapper End-->
+	</div>
+	<!--Wrapper End-->
+    {% include 'partials/scripts.html' %}
+</body>
+
+
+</html>

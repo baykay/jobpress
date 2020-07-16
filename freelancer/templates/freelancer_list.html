@@ -1,0 +1,53 @@
+{% extends 'filteristings_base.html' %}
+{% load static %}
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock %}
+
+{% block filter %}
+    {% for freelancer in freelancers %}
+        <div class="wt-userlistinghold">
+            <figure class="wt-userlistingimg">
+                <img src="{{ freelancer.avatar.url }}" alt="image description">
+            </figure>
+            <div class="wt-userlistingcontent">
+                <div class="wt-contenthead">
+                    <div class="wt-title">
+                        <a href="{{ freelancer.user.get_absolute_url }}"><i class="fa fa-user"></i> {{ freelancer.get_full_name}}</a>
+                        <h2>{{ freelancer.profession }}</h2>
+                    </div>
+                    <ul class="wt-userlisting-breadcrumb">
+                        <li><span><i class="far fa-money-bill-alt"></i> ${{ freelancer.hire_rate }} / hr</span></li>
+                        <li><span><img src="{% static 'images/flag/img-02.png' %}" alt="img description"> {{ freelancer.country }}</span></li>
+                        <li><a href="javascript:void(0);"><i class="fa fa-heart"></i> Click to Save</a></li>
+                    </ul>
+                </div>
+                <div class="wt-rightarea">
+                    <span class="wt-starsvtwo">
+                        <i class="fa fa-star fill"></i>
+                        <i class="fa fa-star fill"></i>
+                        <i class="fa fa-star fill"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </span>
+                    {% if freelancer.confirmed %}
+                        <span class="wt-starcontent"><i class="fa fa-user-circle-o"></i><em>Verified</em></span>
+                    {% else %}
+                        <span class="wt-starcontent"><i class="fa fa-user-secret"></i><em>UnVerified</em></span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="wt-description">
+                <p>{{ freelancer.description | capfirst | truncatewords:40 }}</p>
+            </div>
+            <div class="wt-tag wt-widgettag">
+                {% for interest in freelancer.interests.all %}
+                    <a href="{{ interest.get_absolute_url }}">{{ interest }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+    <nav class="wt-pagination">
+        {% include 'partials/pagination.html' %}
+    </nav>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% if messages %}
+    {% for message in messages %}
+        <div class="wt-jobalertsholder">
+            <ul class="wt-jobalerts">
+                <li class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                    <span><em>
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                            Error:
+                        {% else %}
+                            {{ message.tags | title}}:
+                        {% endif %}
+                    </em>  {{ message|capfirst|safe }}</span>
+                    <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="Close"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>
+        </div>
+    {% endfor %}
+{% endif %}

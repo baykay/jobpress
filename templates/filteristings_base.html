@@ -1,0 +1,73 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    {% block title %}<title></title>{% endblock %}
+    {% include 'partials/stylesheet.html' %}
+</head>
+<body {% if not user.is_authenticated %}class="" {% else %}class="wt-login"{% endif %}>
+	<!-- Preloader Start -->
+{#	<div class="preloader-outer">#}
+{#		<div class="loader"></div>#}
+{#	</div>#}
+	<!-- Preloader End -->
+	<!-- Wrapper Start -->
+	<div id="wt-wrapper" class="wt-wrapper wt-haslayout">
+		<!-- Content Wrapper Start -->
+		<div class="wt-contentwrapper">
+			<!-- Header Start -->
+			{% include 'partials/navbar.html' %}
+			<!--Header End-->
+			<div class="wt-categoriesslider-holder wt-haslayout">
+				<div class="wt-title">
+					<h2>Browse Top Job Categories:</h2>
+				</div>
+				<div id="wt-categoriesslider" class="wt-categoriesslider owl-carousel">
+					{% for category in footer_categories %}
+                        <div class="wt-categoryslidercontent item">
+                            <figure><img src="{{ category.image.url }}" alt="image description"></figure>
+                            <div class="wt-cattitle">
+                                <h3><a href="{{ category.get_absolute_url }}">{{ category.name | title }}</a></h3>
+                                <span>Jobs: {{ category.jobs.count }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+				</div>
+			</div>
+			<!--Inner Home End-->
+			<!--Main Start-->
+			<main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
+				<div class="wt-main-section wt-haslayout">
+					<!-- User Listing Start-->
+					<div class="wt-haslayout">
+						<div class="container">
+							<div class="row">
+								<div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
+									{% include 'freelancer_filter.html' %}
+									<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
+										<div class="wt-userlistingholder wt-userlisting wt-haslayout">
+                                            {% block filter %}
+
+                                            {% endblock filter %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- User Listing End-->
+				</div>
+			</main>
+			<!--Main End-->
+			<!--Footer Start-->
+			{% include 'partials/footer.html' %}
+			<!--Footer End-->
+		</div>
+		<!--Content Wrapper End-->
+	</div>
+	<!--Wrapper End-->
+    {% include 'partials/scripts.html' %}
+</body>
+
+
+</html>

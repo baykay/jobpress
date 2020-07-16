@@ -1,0 +1,273 @@
+{% load thumbnail %}
+{% load static %}
+<!-- Header Start -->
+<header id="wt-header" class="wt-header wt-haslayout">
+    <div class="wt-navigationarea">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <strong class="wt-logo"><a href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}"></a></strong>
+                    {% if request.path != '/' %}
+                        <form action="{% url 'jobs:search' %}" class="wt-formtheme wt-formbanner wt-formbannervtwo">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input type="text" name="title" class="form-control" placeholder="I’m looking for" value="{{ request.GET.title }}">
+                                    <div class="wt-formoptions">
+                                        <div class="wt-dropdown">
+                                            <span>In: <em class="selected-search-type">{{ request.GET.searchtype | title }} </em><i class="lnr lnr-chevron-down"></i></span>
+                                        </div>
+                                        <div class="wt-radioholder">
+                                            <span class="wt-radio">
+                                                <input id="wt-jobs" data-title="Jobs" type="radio" name="searchtype" value="job">
+                                                <label for="wt-jobs">Jobs</label>
+                                            </span>
+                                            <span class="wt-radio">
+                                                <input id="wt-freelancers" data-title="Freelancers" type="radio" name="searchtype" value="freelancer">
+                                                <label for="wt-freelancers">Freelancers</label>
+                                            </span>
+                                            <span class="wt-radio">
+                                                <input id="wt-companies" data-title="Companies" type="radio" name="searchtype" value="company">
+                                                <label for="wt-companies">Companies</label>
+                                            </span>
+                                        </div>
+                                        <button type="submit" class="wt-searchbtn"><i class="lnr lnr-magnifier"></i></button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    {% endif %}
+                    <div class="wt-rightarea">
+                        <nav id="wt-nav" class="wt-nav navbar-expand-lg">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <i class="lnr lnr-menu"></i>
+                            </button>
+                            <div class="collapse navbar-collapse wt-navigation" id="navbarNav">
+                                <ul class="navbar-nav">
+                                    <li class="menu-item-has-children page_item_has_children">
+                                        <a href="{% url 'company:companies_list' %}">Companies</a>
+                                        <ul class="sub-menu">
+                                            <li>
+                                                <a href="{% url 'freelancer:followed_companies' %}">Followed Companies</a>
+                                            </li>
+                                            <li>
+                                                <a href="{% url 'company:companies_list' %}">All Companies</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children page_item_has_children">
+                                        <a href="{% url 'jobs:all-jobs' %}">Browse Jobs</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{% url 'jobs:jobpress-jobs' %}">Browse All</a></li>
+                                            <li><a href="{% url 'jobs:followed_companies' %}">By Companies</a></li>
+                                            <li><a href="{% url 'jobs:all-categories' %}">By Category</a></li>
+                                            <li><a href="{% url 'jobs:all-accounts' %}">By Accounts</a></li>
+                                            <li><a href="{% url 'jobs:all-skills' %}">By Skills</a></li>
+                                            <li><a href="{% url 'jobs:all-countries' %}">By Countries</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children page_item_has_children">
+                                        <a href="{% url 'freelancer:freelancer_list' %}">Freelancers</a>
+                                        <ul class="sub-menu">
+                                            <li>
+                                                <a href="#">User Listing</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                        {% if not user.is_authenticated %}
+                            <div class="wt-loginarea">
+                                <figure class="wt-userimg">
+                                    <img src="{% static 'images/user-login.png' %}" alt="img description">
+                                </figure>
+                                <div class="wt-loginoption">
+                                    <a href="javascript:void(0);" id="wt-loginbtn" class="wt-loginbtn">Login</a>
+{#                                    <a href="{% url 'accounts:login' %}" id="wt-loginbtn" class="wt-loginbtn">Login</a>#}
+                                    <div class="wt-loginformhold">
+                                        <div class="wt-loginheader">
+                                            <span>Login</span>
+                                            <a href="javascript:;"><i class="fa fa-times"></i></a>
+                                        </div>
+                                        <form method="post" action="{% url 'accounts:login' %}" class="wt-formtheme wt-loginform do-login-form">
+                                            {% csrf_token %}
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <input type="email" name="email" class="form-control" placeholder="Email">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" name="password" class="form-control" placeholder="Password">
+                                                </div>
+                                                <div class="wt-logininfo">
+                                                    <button class="wt-btn do-login-button" type="submit">Login</button>
+                                                    <span class="wt-checkbox">
+                                                        <input id="wt-login" type="checkbox" name="rememberme">
+                                                        <label for="wt-login">Keep me logged in</label>
+                                                    </span>
+                                                </div>
+                                            </fieldset>
+                                            <div class="wt-loginfooterinfo">
+                                                <a href="javascript:" class="wt-forgot-password">Forgot password?</a>
+                                                <a href="#">Create account</a>
+                                            </div>
+                                        </form>
+                                        <form class="wt-formtheme wt-loginform do-forgot-password-form wt-hide-form">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <input type="email" name="email" class="form-control get_password" placeholder="Email">
+                                                </div>
+                                                <div class="wt-logininfo">
+                                                    <a href="javascript:;" class="wt-btn do-get-password">Reset Password</a>
+                                                </div>
+                                            </fieldset>
+                                            <div class="wt-loginfooterinfo">
+                                                <a href="#" class="wt-show-login">Login</a>
+                                                <a href="{% url 'accounts:register' %}">Create account</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <a href="{% url 'accounts:register' %}" class="wt-btn">Join Now</a>
+                            </div>
+                        {% else %}
+                            <div class="wt-userlogedin">
+                                <figure class="wt-userimg">
+                                    {% if user.is_company %}
+                                        {% if user.company_profile.logo %}
+                                            {% thumbnail user.company_profile.logo "150x150" crop="center" as company_profile %}
+                                                <img alt="{{ user.company_profile.name }}"
+                                                     src="{{ company_profile.url }}"
+                                                     width="{{ company_profile.x }}"
+                                                     height="{{ company_profile.y }}">
+                                            {% endthumbnail %}
+                                        {% endif %}
+                                    {% elif user.is_freelancer %}
+                                        {% if user.freelancer_profile.avatar %}
+                                            {% thumbnail user.freelancer_profile.avatar "150x150" crop="center" as company_profile %}
+                                                <img alt="{{ user.company_profile.name }}"
+                                                     src="{{ company_profile.url }}"
+                                                     width="{{ company_profile.x }}"
+                                                     height="{{ company_profile.y }}">
+                                            {% endthumbnail %}
+                                        {% endif %}
+                                    {% else %}
+                                    {% endif %}
+                                </figure>
+                                <div class="wt-username">
+                                {% if user.is_company %}
+                                    {% if user.company_profile.name %}
+                                        <h3>{{ user.company_profile.name|title }}</h3>
+                                    {% endif %}
+                                    {% if user.company_profile.tagline %}
+                                        <span>{{ user.company_profile.tagline | title }}</span>
+                                    {% else %}
+                                        <span>Your Company Tagline</span>
+                                    {% endif %}
+                                {% elif user.is_freelancer %}
+                                    {% if user.freelancer_profile.get_full_name %}
+                                        <h3>{{ user.freelancer_profile.get_full_name|title }}</h3>
+                                    {% else %}
+                                        <h3>Update Your Profile</h3>
+                                    {% endif %}
+                                    {% if user.freelancer_profile.profession %}
+                                        <span>{{ user.freelancer_profile.profession | title }}</span>
+                                    {% else %}
+                                        <span>Your profession</span>
+                                    {% endif %}
+                                {% else %}
+                                    <span>Please Contact The Administration</span>
+                                {% endif %}
+                                </div>
+                                <nav class="wt-usernav">
+                                    <ul>
+                                        {% if user.is_company %}
+                                            <li>
+                                                <a href="{% url 'company:statistics' %}"><span>Statistics</span></a>
+                                            </li>
+                                            <li>
+                                                <a href="{% url 'company:dashboard' %}"><span>Dashboard</span></a>
+                                            </li>
+                                        {% endif %}
+                                        {% if user.is_company%}
+                                            <li class="menu-item-has-children"><a href="{% url 'company:profile' %}"><span>Profile</span></a>
+                                        {% else %}
+                                            <li class="menu-item-has-children"><a class="wt-btndisbaled "><span>Dashboard</span></a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="{% url 'freelancer:dashboard' %}">Dashboard</a></li>
+                                                    <li><a href="{% url 'freelancer:awards' %}">Awards</a></li>
+                                                    <li><a href="{% url 'freelancer:projects' %}">Projects</a></li>
+                                                    <li><a href="{% url 'freelancer:skills' %}">Skills</a></li>
+                                                    <li><a href="{% url 'freelancer:experience' %}">Experiences</a></li>
+                                                    <li><a href="{% url 'freelancer:education' %}">Education</a></li>
+                                                    <li><a href="{% url 'freelancer:profile' %}">Your Profile</a></li>
+                                                </ul>
+                                        {% endif %}
+                                        </li>
+                                        <li class="menu-item-has-children"><a class="wt-btndisbaled"><span>All Jobs</span></a>
+                                            <ul class="sub-menu">
+                                                <li><a href="{% url 'company:completed_jobs' %}">Completed Jobs</a></li>
+                                                <li><a href="{% url 'company:manage_jobs' %}">Manage Jobs</a></li>
+                                                <li><a href="{% url 'company:hired_on_going_jobs' %}">Hired Jobs</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="wt-notificationicon menu-item-has-children">
+                                            <a href="javascript:void(0);">
+                                                <span>Messages</span>
+                                            </a>
+                                            <ul class="sub-menu">
+                                                <li><a href="#">Messages</a></li>
+                                                <li><a href="#">Messages V 2</a></li>
+                                            </ul>
+                                        </li>
+                                        {% if request.user.is_freelancer %}
+                                            <li class="menu-item-has-children"><a class="wt-btndisbaled"><span>Get Personal</span></a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="{% url 'freelancer:followed_companies' %}">Followed Companies</a></li>
+                                                    <li><a href="{% url 'freelancer:saved_job_view' %}">Saved Jobs</a></li>
+                                                    <li><a href="#">Ongoing Jobs</a></li>
+                                                </ul>
+                                            </li>
+                                        {% endif %}
+                                        <li class="menu-item-has-children"><a class="wt-btndisbaled"><span>Article Blog</span></a>
+                                            <ul class="sub-menu">
+                                                <li><a href="{% url 'blog:article_list' %}">Articles</a></li>
+                                                <li><a href="{% url 'blog:article_management' %}">Manage Articles</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span>Invoices</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span>Category</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span>Packages</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'accounts:help_support' %}">
+                                                <span>Help &amp; Support</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'accounts:logout' %}">
+                                                <span>Logout</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!--Header End-->

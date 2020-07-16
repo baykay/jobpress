@@ -1,0 +1,139 @@
+<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
+    <aside id="wt-sidebar" class="wt-sidebar wt-usersidebar">
+    <div class="wt-widget wt-effectiveholder">
+        <div class="wt-widgettitle">
+            <h2>Filter By Profession</h2>
+        </div>
+        <div class="wt-widgetcontent">
+            <form class="wt-formtheme wt-formsearch">
+                <fieldset>
+                    <div class="form-group">
+                        {{ form.freelancer_by_profession }}
+                        <button type="submit" class="wt-searchgbtn">
+                            <i class="lnr lnr-magnifier"></i>
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="wt-widget wt-effectiveholder">
+        <div class="wt-widgettitle">
+            <h2>Filter By Account Type</h2>
+        </div>
+        <div class="wt-widgetcontent">
+            <form class="wt-formtheme wt-formsearch">
+                <fieldset>
+                    <div class="wt-checkboxholder wt-verticalscrollbar">
+                        {% for item in freelancer_filter_form.freelancer_by_account_type %}
+                            <span class="wt-radio">
+                                {{ item.tag }}
+                                <label for="{{ item.id_for_label }}">{{ item.choice_label }}</label>
+                            </span>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="wt-searchgbtn">
+                        <i class="lnr lnr-magnifier"></i>
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="wt-widget wt-effectiveholder">
+        <div class="wt-widgettitle">
+            <h2>Filter By Department</h2>
+        </div>
+        <div class="wt-widgetcontent">
+            <form class="wt-formtheme wt-formsearch">
+                <fieldset>
+                    <div class="wt-checkboxholder wt-verticalscrollbar">
+                        {% for item in freelancer_filter_form.freelancer_by_department %}
+                            <span class="wt-radio">
+                                {{ item.tag }}
+                                <label for="{{ item.id_for_label }}">{{ item.choice_label }}</label>
+                            </span>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="wt-searchgbtn">
+                        <i class="lnr lnr-magnifier"></i>
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="wt-widget wt-effectiveholder">
+        <div class="wt-widgettitle">
+            <h2>Filter By Interests</h2>
+        </div>
+        <div class="wt-widgetcontent">
+            <form class="wt-formtheme wt-formsearch">
+                <fieldset>
+                    <div class="form-group">
+                        {{ freelancer_filter_form.search_freelancer_by_interests }}
+                        <button type="submit" class="wt-searchgbtn">
+                            <i class="lnr lnr-magnifier"></i>
+                        </button>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="wt-checkboxholder wt-verticalscrollbar">
+                        {% for item in freelancer_filter_form.select_freelancer_by_interests %}
+                            <span class="wt-checkbox">
+                                {{ item.tag }}
+                                <label for="{{ item.id_for_label }}">{{ item.choice_label }}</label>
+                            </span>
+                        {% endfor %}
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="wt-widget wt-effectiveholder">
+        <div class="wt-widgettitle">
+            <h2>Filter By Hire Rate</h2>
+        </div>
+        <div class="wt-widgetcontent">
+            <form class="wt-formtheme wt-formsearch">
+                <fieldset>
+                    <div class="form-group">
+                        {{ freelancer_filter_form.freelancer_by_hourly_rate }}
+                    </div>
+                </fieldset>
+                <small>Select an option and click enter to filter based on hire rate.</small>
+            </form>
+        </div>
+    </div>
+    <div class="wt-widget wt-effectiveholder">
+        <div class="wt-widgettitle">
+            <h2>Filter By Country</h2>
+        </div>
+        <div class="wt-widgetcontent">
+            <form class="wt-formtheme wt-formsearch">
+                <fieldset>
+                    <div class="wt-checkboxholder wt-verticalscrollbar">
+                        {% for item in freelancer_filter_form.freelancer_by_country %}
+                            <span class="wt-radio">
+                                {{ item.tag }}
+                                <label for="{{ item.id_for_label }}">{{ item.choice_label }}</label>
+                            </span>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="wt-searchgbtn">
+                        <i class="lnr lnr-magnifier"></i>
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="wt-widget wt-applyfilters-holder">
+        <div class="wt-widgetcontent">
+            <div class="wt-applyfilters">
+                <span>Click the <i class="lnr lnr-magnifier"></i>
+                    icon on each section to apply latest
+                    <br> changes made by you.
+                </span>
+            </div>
+        </div>
+    </div>
+    </aside>
+</div>

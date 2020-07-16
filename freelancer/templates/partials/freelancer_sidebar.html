@@ -1,0 +1,42 @@
+{% load static %}
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+    <aside id="wt-sidebar" class="wt-sidebar wt-dashboardsave">
+        <div class="wt-proposalsr">
+            <div class="wt-proposalsrcontent">
+                <figure>
+                    <img src="images/save-1.png" alt="image">
+                </figure>
+                <div class="wt-title">
+                    <h3>150</h3>
+                    <span>Jobs you saved</span>
+                </div>
+            </div>
+        </div>
+        <div class="wt-proposalsr">
+            <div class="wt-proposalsrcontent wt-componyfolow">
+                <figure>
+                    <img src="{% static 'images/save-2.png' %}" alt="image">
+                </figure>
+                <div class="wt-title">
+                    <h3>{{ followed_companies_count.count }}</h3>
+                    <span>Companies you followed</span>
+                </div>
+            </div>
+        </div>
+        <div class="wt-proposalsr">
+            <div class="wt-proposalsrcontent  wt-freelancelike">
+                <figure>
+                    <img src="images/save-3.png" alt="image">
+                </figure>
+                <div class="wt-title">
+                    <h3>2075</h3>
+                    <span>Freelancers you liked</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <div class="wt-companyad">
+        <figure class="wt-companyadimg"><img src="images/add-img.jpg" alt="img description"></figure>
+        <span>Advertisement  255px X 255px</span>
+    </div>
+</div>

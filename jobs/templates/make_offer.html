@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Make an offer to {{ freelancer_for_offer.freelancer_profile.get_full_name | title }}</title>
+{% endblock title %}
+{% load static %}
+{% block content %}
+    <main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
+    <div class="wt-haslayout wt-main-section">
+        <!-- User Listing Start-->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 push-lg-2">
+                    <div class="wt-proposalholder">
+                        <span class="wt-featuredtag"><img src="{% static 'images/featured.png' %}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                        <div class="wt-proposalhead">
+                            <h2>{{ freelancer_for_offer.freelancer_profile.get_full_name }} </h2>
+                            <ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
+                                <li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> {{ freelancer_for_offer.freelancer_profile.hire_rate }}</span></li>
+                                <li><span><img src="{% static 'images/flag/img-02.png' %}" alt="img description">  {{ freelancer_for_offer.freelancer_profile.country }}</span></li>
+                                <li><span><i class="far fa-folder"></i> Type: {{ freelancer_for_offer.freelancer_profile.account_type }}</span></li>
+                                <li><span><i class="far fa-clock"></i> Member Since: {{ freelancer_for_offer.freelancer_profile.joined_date }}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="wt-proposalamount-holder">
+                        <div class="wt-title">
+                            <h2>Offer Details</h2>
+                        </div>
+                        <form class="wt-formtheme wt-formproposal" method="post">{% csrf_token %}
+                            <fieldset>
+                                <div class="wt-jobskills wt-tabsinfo">
+                                    <div class="form-group">
+                                        {{ form.job }}
+                                    </div>
+                                    {{ form.job.errors }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.description }}
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="wt-btn">Send Offer</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- User Listing End-->
+    </div>
+</main>
+{% endblock content %}

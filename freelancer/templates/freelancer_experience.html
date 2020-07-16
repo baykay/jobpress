@@ -1,0 +1,89 @@
+{% extends 'dashboard_base.html' %}
+{% load humanize %}
+{% block title %}<title>Freelancer Experience</title>{% endblock %}
+{% block dashboard %}
+<!--Register Form Start-->
+<section class="wt-haslayout">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
+            <div class="wt-haslayout wt-dbsectionspace">
+            {% include 'partials/messages.html' %}
+                <div class="wt-dashboardbox wt-dashboardtabsholder">
+                    <div class="wt-dashboardboxtitle">
+                        <h2>Freelancer Experience</h2>
+                    </div>
+                    <div class="wt-dashboardtabs">
+                        <ul class="wt-tabstitle nav navbar-nav">
+                            <li class="nav-item">
+                            <li class="nav-item"><a data-toggle="tab" href="#wt-skills">Freelancer Experience</a></li>
+                        </ul>
+                    </div>
+                    <div class="wt-tabscontent tab-content">
+                        <div class="wt-personalskillshold tab-pane active fade show" id="wt-skills">
+                            <div class="wt-userexperience">
+                                <div class="wt-tabscontenttitle wt-addnew">
+                                    <h2>Add Your Education</h2>
+                                </div>
+                                <ul class="wt-experienceaccordion accordion">
+                                        <div class="wt-collapseexp show" id="innertitle1" aria-labelledby="accordioninnertitle1" data-parent="#accordion">
+                                            <form class="wt-formtheme wt-userform" method="post" novalidate>{% csrf_token %}
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        {{ form.company }}
+                                                        {{ form.company.errors }}
+                                                    </div>
+                                                    <div class="form-group form-group-half">
+                                                        {{ form.start_date }}
+                                                        {{ form.start_date.errors }}
+                                                    </div>
+                                                    <div class="form-group form-group-half">
+                                                        {{ form.end_date }}
+                                                        {{ form.end_date.errors }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        {{ form.title }}
+                                                        {{ form.title.errors }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        {{ form.description }}
+                                                        {{ form.description.errors }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <span>* Leave ending date empty if its your current job</span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        {% if not form.instance.pk %}
+                                                            <button type="submit" class="wt-btn">add</button>
+                                                        {% else %}
+                                                            <button type="submit" class="wt-btn">edit</button>
+                                                        {% endif %}
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>{% if experiences %}{% for experience in experiences %}
+                                        <div class="wt-accordioninnertitle">
+                                            <span id="accordioninnertitlea2" data-toggle="collapse" data-target="#innertitlea2">{{ experience.title | title }}
+                                                <em>({{ experience.start_date.month }} {{ experience.start_date.year }}
+                                                    {% if experience.end_date %} - {{ experience.end_date.month }} {{ experience.end_date.year }}
+                                                    {% else %}- Till Date
+                                                    {% endif %})
+                                                </em>
+                                            </span>
+                                            <div class="wt-rightarea">
+                                                <a href="{% url 'freelancer:experience_update' experience.pk %}" class="wt-addinfo wt-skillsaddinfo" ><i class="lnr lnr-pencil"></i></a>
+                                                <a href="{% url 'freelancer:experience_delete' experience.pk %}" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                            </div>
+                                        </div>{% endfor %}{% endif %}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'partials/sidebar.html' %}
+    </div>
+</section>
+<!--Register Form End-->
+{% endblock dashboard %}

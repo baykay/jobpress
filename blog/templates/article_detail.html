@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock %}
+{% block style %}
+    {% include 'partials/blog_detail_style.html' %}
+{% endblock style %}
+{% block content %}
+<!--Main Start-->
+<main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
+    <!--Categories Start-->
+    <div class="wt-haslayout wt-main-section">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 float-left">
+                    <div class="wt-articlesingle-holder wt-bgwhite">
+                        <div class="wt-articlesingle-content">
+                            <div class="wt-title">
+                                <h2>{{ article.title | title }}</h2>
+                            </div>
+                            <ul class="wt-postarticlemeta">
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <i class="lnr lnr-eye"></i>
+                                        <span>{{ article.views_count  }}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <i class="lnr lnr-calendar-full"></i>
+                                        <span>{{ article.date_created.date  }}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <i class="lnr lnr-user"></i>
+                                        <span>{{ article.get_author | title }}</span>
+                                    </a>
+                                </li>
+                                {% if article.category %}
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <i class="lnr lnr-tag"></i>
+                                            <span>{{ article.category }}</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                            <div class="wt-description">
+                                {{ article.content | capfirst | safe }}
+                            </div>
+                            <div class="wt-tagsshare">
+                                {% if article.tags.all %}
+                                    <div class="wt-tag wt-widgettag">
+                                        <span>Tags:</span>
+                                        {% for tag in article.tags.all %}
+                                            <a href="javascript:void(0);">{{ tag.name | title }}</a>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <ul class="wt-socialiconssimple wt-blogsocialicons">
+                                    <li class="wt-sharejob"><span>Share this blog</span></li>
+                                    <li class="wt-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook-f"></i></a></li>
+                                    <li class="wt-twitter"><a href="javascript:void(0);"><i class="fab fa-twitter"></i></a></li>
+                                    <li class="wt-linkedin"><a href="javascript:void(0);"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li class="wt-clone"><a href="javascript:void(0);"><i class="far fa-clone"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="wt-author">
+                                <div class="wt-authordetails">
+                                    <figure>
+                                        {% thumbnail article.get_author_avatar "60x60" as avatar %}
+                                            <img
+                                                    src="{{ avatar.url }}" width="{{ avatar.x }}"
+                                                    height="{{ avatar.y }}"
+                                                    alt="{{ article.get_author }}-{{ article.title }}">
+                                        {% endthumbnail %}
+                                    </figure>
+                                    <div class="wt-authorcontent">
+                                        <div class="wt-authorhead">
+                                            <div class="wt-boxleft">
+                                                <h3><a href="javascript:void(0);">{{ article.get_author | title }}</a></h3>
+                                                <span><i class="lnr lnr-clock"></i> Author Since: {{ article.authoring_date.date }}</span>
+                                            </div>
+                                            <div class="wt-boxright">
+                                                <ul class="wt-socialiconssimple">
+                                                    <li class="wt-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook-f"></i></a></li>
+                                                    <li class="wt-twitter"><a href="javascript:void(0);"><i class="fab fa-twitter"></i></a></li>
+                                                    <li class="wt-linkedin"><a href="javascript:void(0);"><i class="fab fa-linkedin-in"></i></a></li>
+                                                    <li class="wt-googleplus"><a href="javascript:void(0);"><i class="fab fa-google"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="wt-description">
+                                            <p>{{ article.get_author_bio | capfirst }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="wt-comments" class="wt-comments">
+                                <h2>{{ article.comment_article.count }} Comment{{ article.comment_article.count | pluralize}}</h2>
+                                {% if comments %}
+                                    <ul>
+                                        {% for comment in comments %}
+                                            <li>
+                                                <div class="wt-author">
+                                                    <div class="wt-authordetails">
+                                                        <figure>
+                                                            {% thumbnail comment.get_commenter_avatar "60x60" as avatar %}
+                                                                <img
+                                                                        src="{{ avatar.url }}" width="{{ avatar.x }}"
+                                                                        height="{{ avatar.y }}"
+                                                                        alt="{{ article.get_author }}-{{ article.title }}">
+                                                            {% endthumbnail %}
+                                                        </figure>
+                                                        <div class="wt-authorcontent">
+                                                            <div class="wt-authorhead">
+                                                                <div class="wt-boxleft">
+                                                                    <h3><a href="{{ comment.get_commenter_profile_url }}">{{ comment.get_commenter }}</a></h3>
+                                                                    <span>{{ comment.commented_at | timesince | title }} Ago</span>
+                                                                </div>
+                                                                <div class="wt-boxright">
+                                                                    <a onclick="document.getElementById('reply_box-{{ forloop.counter }}').style.display='block';" class="wt-btnreply" href="javascript:void(0);"><span class="wt-clickreply">Click To Reply</span><i class="fa fa-mail-reply"></i></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="wt-description">
+                                                                <p>{{ comment.comment }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {% if comment.replies.all %}
+                                                        {% for reply in comment.replies.all %}
+                                                            <ul class="wt-child">
+                                                                <li>
+                                                                    <div class="wt-author">
+                                                                        <div class="wt-authordetails">
+                                                                            <figure>
+                                                                                {% thumbnail reply.get_replier_avatar "60x60" as replier_avatar %}
+                                                                                    <img
+                                                                                            src="{{ replier_avatar.url }}" width="{{ avatar.x }}"
+                                                                                            height="{{ replier_avatar.y }}"
+                                                                                            alt="{{ replier_avatar.get_replier }}-{{ article.title }}">
+                                                                                {% endthumbnail %}
+                                                                            </figure>
+                                                                            <div class="wt-authorcontent">
+                                                                                <div class="wt-authorhead">
+                                                                                    <div class="wt-boxleft">
+                                                                                        <h3><a href="{{ reply.get_replier_profile_url }}">{{ reply.get_replier }}</a></h3>
+                                                                                        <span>{{ reply.date_replied | timesince |title }} Ago</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="wt-description">
+                                                                                    <p>{{ reply.reply }}</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                    <div class="wt-replaybox" style="display: none;" id="reply_box-{{ forloop.counter }}">
+                                                        <form action="{% url 'blog:reply_create_view' article.slug %}" class="wt-formtheme wt-formleavecomment" method="post">
+                                                            {% csrf_token %}
+                                                            <fieldset>
+                                                                <div class="form-group">
+                                                                    {{ reply_form.reply }}
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <button class="wt-btn " type="submit">Reply</button>
+                                                                    <i class="fa fa-close" onclick="document.getElementById('reply_box-{{ forloop.counter }}').style.display='none'" ></i>
+                                                                </div>
+                                                            </fieldset>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                            {% if user.is_authenticated %}
+                                <div class="wt-replaybox">
+                                    <h2>Leave Your Comment</h2>
+                                    <form action="{% url 'blog:comment_create_view' slug=article.slug %}" class="wt-formtheme wt-formleavecomment" method="post">
+                                        {% csrf_token %}
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <input type="text" name="name" value="{{ article.get_author }}" class="form-control" placeholder="Author Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="email" value="{{ article.get_author_email }}" name="email" class="form-control" placeholder="Author Email">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="hidden" name="name" class="form-control" placeholder="Name*">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="hidden" name="email" class="form-control" placeholder="Email*">
+                                            </div>
+                                            <div class="form-group">
+                                                {{ form.comment }}
+                                                <small>{{ form.comment.errors }}</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <button class="wt-btn" type="submit">Comment</button>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            {% else %}
+                                <div class="wt-commentsbtn">
+                                    <a href="{% url 'accounts:login' %}" class="wt-btn">Sign in to post a comment... </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Limitless Experience End-->
+</main>
+<!--Main End-->
+{% endblock content %}

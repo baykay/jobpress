@@ -1,0 +1,55 @@
+{% extends 'dashboard_base.html' %}
+{% block title %} <title>Change Email Notifications</title>{% endblock title %}
+{% block dashboard %}
+<section class="wt-haslayout wt-dbsectionspace">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 m-auto">
+            <div class="wt-dashboardbox wt-dashboardtabsholder wt-accountsettingholder">
+                <div class="wt-dashboardtabs">
+                    <ul class="wt-tabstitle nav navbar-nav">
+                        <li class="nav-item"><a class="active" data-toggle="tab" href="#wt-security">Email Notifications</a></li>
+                    </ul>
+                </div>
+                <div class="wt-tabscontent tab-content">
+                    <div class="wt-securityhold tab-pane active fade show" id="wt-security">
+                        <div class="wt-securitysettings wt-tabsinfo">
+                            <div class="wt-tabscontenttitle">
+                                <h2>Email Notifications</h2>
+                            </div>
+                            <div class="wt-settingscontent">
+                                <div class="wt-description">
+                                    <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua aut enim ad minim veniamac quis nostrud exercitation ullamco laboris.</p>
+                                </div>
+                                <form class="wt-formtheme wt-userform" novalidate method="post">{% csrf_token %}
+                                    <fieldset>
+                                        <div class="form-group form-disabeld">
+                                            <input type="password" name="password" class="form-control" placeholder="{{ user.email }}" disabled="">
+                                        </div>
+                                        <div class="form-group">
+                                            <ul class="wt-accountinfo">
+                                                {% for f in form %}
+                                                <li>
+                                                    <div class="wt-on-off">
+                                                        {{ f }}
+                                                        <label for="{{ f.id_for_label }}"><i></i></label>
+                                                    </div>
+                                                    <span>{{ f.label }}</span>
+                                                    <small>{{ f.errors }}</small>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="wt-btn">Save Changes</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock dashboard %}

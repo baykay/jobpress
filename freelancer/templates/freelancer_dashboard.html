@@ -1,0 +1,230 @@
+{% extends 'dashboard_base.html' %}
+{% block title %}
+<title>
+    {{ request.user.freelancer_profile.get_full_name | title }}
+</title>
+{% endblock title %}
+{% block dashboard %}
+{% load static %}
+<!--Register Form Start-->
+{% include 'partials/messages.html' %}
+<section class="wt-haslayout wt-dbsectionspace wt-insightuser">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+            <div class="wt-dashboardbox">
+                <div class="wt-dashboardboxtitle wt-yeartag">
+                    <h2>Total Earnings</h2>
+                    <div class="wt-tag wt-widgettag">
+                        <a href="javascript:void(0);">2019</a>
+                        <a href="javascript:void(0);">2018</a>
+                        <a href="javascript:void(0);">2017</a>
+                    </div>
+                </div>
+                <div class="wt-dashboardboxcontent">
+                    <div class="wt-jobchartholder">
+                        <canvas id="wt-jobchart" class="wt-jobchart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="wt-dashboardbox wt-earningsholder">
+                <div class="wt-dashboardboxtitle wt-titlewithsearch">
+                    <h2>Past Earnings</h2>
+                    <form class="wt-formtheme wt-formsearch">
+                        <fieldset>
+                            <div class="form-group">
+                                <input type="text" name="Search" class="form-control" placeholder="Search Here">
+                                <a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="wt-dashboardboxcontent">
+                    <table class="wt-tablecategories">
+                        <thead>
+                            <tr>
+                                <th>Project Title</th>
+                                <th>Date</th>
+                                <th>Earnings</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for job_earn in jobs_earnings %}
+                                <tr>
+                                    <td>{{ job_earn.job.title | title }}</td>
+                                    <td>{{ job_earn.date_created.date }}</td>
+                                    <td>${{ job_earn.amount }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="ccol-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+            <div class="row">
+                <div class="wt-insightsitemholder">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 float-left">
+                        <div class="wt-insightsitem wt-dashboardbox wt-insightnoticon">
+                            <figure class="wt-userlistingimg">
+                                <img src="{% static 'images/thumbnail/img-19.png' %}" alt="image description" class="mCS_img_loaded">
+                            </figure>
+                            <div class="wt-insightdetails">
+                                <div class="wt-title">
+                                    <h3>New Messages</h3>
+                                    <a href="javascript:void(0)">Click To View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 float-left">
+                        <div class="wt-insightsitem wt-dashboardbox">
+{#                            <span class="wt-pakagespinner"><i class="fa fa-spinner wt-uploading"></i> D29 : H06 : M38 : S42</span>#}
+                            <figure class="wt-userlistingimg">
+                                <img src="{% static 'images/thumbnail/img-21.png' %}" alt="image description" class="mCS_img_loaded">
+                            </figure>
+                            <div class="wt-insightdetails">
+                                <div class="wt-title">
+                                    <h3>Check Package Expiry</h3>
+                                    <a href="javascript:void(0)">Click To View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 float-left">
+                        <div class="wt-insightsitem wt-dashboardbox">
+                            <figure class="wt-userlistingimg">
+                                <img src="{% static 'images/thumbnail/img-20.png' %}" alt="image description" class="mCS_img_loaded">
+                            </figure>
+                            <div class="wt-insightdetails">
+                                <div class="wt-title">
+                                    <h3>Latest Offers</h3>
+                                    <a href="javascript:void(0)">Click To View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 float-left">
+                        <div class="wt-insightsitem wt-dashboardbox">
+                            <figure class="wt-userlistingimg">
+                                <img src="{% static 'images/thumbnail/img-22.png' %}" alt="image description" class="mCS_img_loaded">
+                            </figure>
+                            <div class="wt-insightdetails">
+                                <div class="wt-title">
+                                    <h3>View Saved Jobs</h3>
+                                    <a href="{% url 'freelancer:saved_job_view' %}">Click To View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wt-insightsongoing">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 float-left">
+                        <div class="wt-dashboardbox wt-ongoingproject">
+                            <div class="wt-dashboardboxtitle">
+                                <h2>Ongoing Projects</h2>
+                            </div>
+                            <div class="wt-dashboardboxcontent wt-hiredfreelance">
+                                {% for job in hired_jobs %}
+                                    <div class="wt-userlistinghold wt-featured">
+                                        <span class="wt-smallfeaturedtag"><img src="{% static 'images/featured.png' %}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span>
+                                        <div class="wt-proposaldetails">
+                                            <div class="wt-contenthead">
+                                                <div class="wt-title">
+                                                    <h3>{{ job.title | title }} <span>{{ job.company.company_profile.name | title }}</span></h3>
+                                                    <a href="javascript:void(0)" class="wt-hiredarrow"><i class="lnr lnr-chevron-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wt-dashboardsaveholder wt-dashboardsave">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 float-left">
+                        <div class="wt-proposalsr wt-dashboardbox">
+                            <div class="wt-proposalsrcontent">
+                                <figure>
+                                    <img src="{% static 'images/thumbnail/img-17.png' %}" alt="image">
+                                </figure>
+                                <div class="wt-title">
+                                    <h3>{{ hired_jobs.count }}</h3>
+                                    <span>Total Ongoing Jobs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 float-left">
+                        <div class="wt-proposalsr wt-dashboardbox">
+                            <div class="wt-proposalsrcontent  wt-freelancelike">
+                                <figure>
+                                    <img src="{% static 'images/thumbnail/img-15.png' %}" alt="image">
+                                </figure>
+                                <div class="wt-title">
+                                    <h3>{{ completed_jobs.count }}</h3>
+                                    <span>Total Completed Jobs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    const menu_icon = document.querySelector('.menu-icon');
+    function addClassFunThree() {
+        this.classList.toggle("click-menu-icon");
+    }
+    menu_icon.addEventListener('click', addClassFunThree);
+    var ctx = document.getElementById("wt-jobchart");
+    var wt_jobchart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["Week 01", "Week 02", "Week 03", "Week 04"],
+            datasets: [{
+                label: 'Jobs Summary',
+                data: [ 6, 8, 4, 7, 10],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        fontSize:12,
+                        fontColor:'#767676'
+                    }
+                }]
+            },
+            legend: {
+                labels: {
+                    fontSize:14,
+                    fontColor: '#767676',
+                    FontFamily:'Open Sans',
+
+                }
+            }
+        }
+    });
+</script>
+{% endblock dashboard %}

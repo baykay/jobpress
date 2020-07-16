@@ -1,0 +1,100 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+{% block title %}<title>{{ proposed_job.title }} Proposal's</title>{% endblock %}
+{% block dashboard %}
+<section class="wt-haslayout wt-dbsectionspace wt-proposals">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-9 m-auto ">
+            {% include 'partials/messages.html' %}
+            <div class="wt-dashboardbox">
+                <div class="wt-dashboardboxtitle">
+                    <h2>Manage Proposals on <strong>"{{ proposed_job.title  }}"</strong></h2>
+                </div>
+                <div class="wt-dashboardboxcontent wt-rcvproposala">
+                    <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
+                        <span class="wt-featuredtag wt-featuredtagcolor3"><img src="{% static 'images/featured.png' %}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span>
+                        <div class="wt-userlistingcontent">
+                            <div class="wt-contenthead">
+                                <div class="wt-title">
+                                    <a href="{% url 'jobs:job_detail' slug=proposed_job.slug %}"><i class="fa fa-eye"></i> View on site</a>
+                                    <h2>{{ proposed_job.title }}</h2>
+                                </div>
+                                <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
+                                    <li><span class="wt-dashboraddoller"><i class="fa fa-dollar-sign"></i> {{ proposed_job.membership }}</span></li>
+                                    <li><span><img src="{% static 'images/flag/img-04.png' %}" alt="img description" class="mCS_img_loaded"> {{ proposed_job.country }}</span></li>
+                                    <li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> Type: {{ proposed_job.job_type }}</a></li>
+                                    <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: {{ proposed_job.duration }}</span></li>
+                                </ul>
+                            </div>
+                            <div class="wt-rightarea">
+                                <div class="wt-hireduserstatus">
+                                    <h4>{{ proposed_job.proposals_set.count }}</h4><span>Proposals Received</span>
+                                    <ul class="wt-hireduserimgs">
+                                        {% for freelancer in proposals %}
+                                            <li><figure><img src="{{ freelancer.freelancer.freelancer_profile.avatar.url }}" alt="img description" class="mCS_img_loaded"></figure></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wt-freelancerholder wt-rcvproposalholder">
+                        <div class="wt-tabscontenttitle">
+                            <h2>Received Proposals</h2>
+                        </div>
+                        {% for proposal in proposals %}
+                            <div class="wt-managejobcontent">
+                                <div class="wt-userlistinghold wt-featured wt-proposalitem">
+                                    <figure class="wt-userlistingimg">
+                                        <img src="{{ proposal.freelancer.freelancer_profile.avatar.url }}" alt="image description" class="mCS_img_loaded">
+                                    </figure>
+                                    <div class="wt-proposaldetails">
+                                        <div class="wt-contenthead">
+                                            <div class="wt-title">
+                                                <a href="#"> {{ proposal.freelancer.freelancer_profile.get_full_name | title }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="wt-proposalfeedback">
+                                            <span class="wt-starsvtwo">
+                                                <i class="fa fa-star fill"></i>
+                                            </span>
+                                            <span class="wt-starcontent"> 4.5/<i>5</i> <em> (860 Feedback)</em></span>
+                                        </div>
+                                    </div>
+                                    <div class="wt-rightarea">
+                                        <div class="wt-btnarea">
+                                            <form action="{% url 'company:hire' %}" method="post">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="freelancer_username" value="{{ proposal.freelancer.username }}">
+                                                <input type="hidden" name="job_slug" value="{{ proposed_job.slug }}">
+                                                <button class="wt-btn" type="submit">Hire Now</button>
+                                            </form>
+{#                                            <a href="{% url 'com' %}" class="wt-btn">Hire Now</a>#}
+                                        </div>
+                                        <div class="wt-hireduserstatus">
+                                            <h5>${{ proposal.amount }}</h5>
+                                            <span>In {{ proposal.duration }}</span>
+                                        </div>
+                                        <div class="wt-hireduserstatus">
+                                            <i class="far fa-envelope"></i>
+                                            <span>Cover Letter</span>
+                                        </div>
+                                        <div class="wt-hireduserstatus">
+                                            <i class="fa fa-paperclip"></i>
+                                            <span>03 file attached</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <nav class="wt-pagination wt-savepagination">
+                                {% include 'partials/pagination.html' %}
+                            </nav>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock dashboard %}

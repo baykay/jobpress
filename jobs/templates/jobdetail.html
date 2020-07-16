@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load is_already_applied %}
+{% load is_saved %}
+{% load static %}
+{% block title %}<title>{{ job.title }}</title>{% endblock %}
+{% block content %}
+<!--Main Start-->
+<main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
+<div class="wt-haslayout wt-main-section">
+    <!-- User Listing Start-->
+    <div class="container">
+        <div class="row">
+            <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
+                {% include 'partials/messages.html' %}
+                    <div class="wt-proposalholder">
+                        <span class="wt-featuredtag"><img src="{% static 'images/featured.png' %}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                        <div class="wt-proposalhead">
+                            <h2>{{ job.title }}</h2>
+                            <ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
+                                <li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> {{ job.hire_rate }}</span></li>
+                                <li><span><img src="{% static 'images/flag/img-02.png' %}" alt="img description">  {{ job.country }}</span></li>
+                                <li><span><i class="far fa-folder"></i> Type: {{ job.job_type }}</span></li>
+                                <li><span><i class="far fa-clock"></i> Duration: {{ job.duration }}</span></li>
+                            </ul>
+                        </div>
+                        {% if request.user.is_authenticated and request.user.is_freelancer %}
+                            {% is_already_applied job request.user as is_applied %}
+                            {% if is_applied %}
+                                <button type="button" class="wt-btn float-right m-auto">You have applied</button>
+                                {% else %}
+                                <div class="wt-btnarea"><a href="{% url 'jobs:make_proposal' job.slug %}" class="wt-btn">Send Proposal</a></div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
+                    <div class="wt-projectdetail-holder">
+                        <div class="wt-projectdetail">
+                            <div class="wt-title">
+                                <h3>{{ job.title }} Details</h3>
+                            </div>
+                            <div class="wt-description">
+                                <p>{{ job.description }}</p>
+                            </div>
+                        </div>
+                        <div class="wt-skillsrequired">
+                            <div class="wt-title">
+                                <h3>Required Skills</h3>
+                            </div>
+                            <div class="wt-tag wt-widgettag">
+                                {% for skill in job.skills.all %}
+                                    <a href="{{ skill.get_absolute_url }}">{{ skill }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
+                    <aside id="wt-sidebar" class="wt-sidebar">
+                        <div class="wt-proposalsr">
+                            <div class="wt-proposalsrcontent">
+                                <span class="wt-proposalsicon"><i class="fa fa-eye"></i><i class="fa fa-briefcase"></i></span>
+                                <div class="wt-title">
+                                    <h3>{{ job.view_count }}</h3>
+                                    <span>User{{ job.view_count | pluralize }} viewed this job</span>
+                                </div>
+                            </div>
+                            <div class="wt-proposalsrcontent">
+                                <span class="wt-proposalsicon"><i class="fa fa-angle-double-down"></i><i class="fa fa-newspaper"></i></span>
+                                <div class="wt-title">
+                                    <h3>{{ job.proposals_set.count }}</h3>
+                                    <span>Proposals Received Till<em>{{ job.proposals_due_date }}</em></span>
+                                </div>
+                            </div>
+                            <div class="tg-authorcodescan">
+                                <figure class="tg-qrcodeimg">
+                                    <img src="{% static 'images/qrcode.png' %}" alt="img description">
+                                </figure>
+                                <div class="tg-qrcodedetail">
+                                    <span class="lnr lnr-laptop-phone"></span>
+                                    <div class="tg-qrcodefeat">
+                                        <h3>Scan with your <span>Smart Phone </span> To Get It Handy.</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if request.user.is_authenticated and request.user.is_freelancer %}
+                                <div class="wt-clicksavearea">
+{#                                        <span>Job ID: tQu5DW9F2G</span>#}
+                                    <form method="post" action="{% url 'freelancer:save_job' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="job_to_save" value="{{ job.slug }}">
+                                        {% is_saved  job.slug request.user as saved %}
+                                        {% if not saved %}
+                                            <button type="submit" class="wt-btn"><i class="far fa-heart"></i> Save</button>
+                                        {% else %}
+                                            <button type="submit" class="wt-btn"><i class="fa fa-heart"></i> Unsave</button>
+                                        {% endif %}
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="wt-widget wt-companysinfo-jobsingle">
+                            <div class="wt-companysdetails">
+                                <figure class="wt-companysimg">
+                                    <img src="{{ job.company.company_profile.banner.url }}" alt="img description">
+                                </figure>
+                                <div class="wt-companysinfo">
+                                    <figure><img src="{{ job.company.company_profile.logo.url }}" alt="img description"></figure>
+                                    <div class="wt-title">
+                                        <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Verified Company</a>
+                                        <h2>{{ job.company.company_profile.name }}</h2>
+                                    </div>
+                                    <ul class="wt-postarticlemeta">
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <span>Open Jobs</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'company:company_detail' job.company.username %}">
+                                                <span>Full Profile</span>
+                                            </a>
+                                        </li>
+                                        <li class="wt-following">
+                                            <a href="javascript:void(0);">
+                                                <span>Following</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wt-widget wt-sharejob">
+                            <div class="wt-widgettitle">
+                                <h2>Share This Job</h2>
+                            </div>
+                            <div class="wt-widgetcontent">
+                                <ul class="wt-socialiconssimple">
+                                    <li class="wt-facebook"><a href="javascript:void(0);"><i class="fab fa-facebook-f"></i>Share on Facebook</a></li>
+                                    <li class="wt-twitter"><a href="javascript:void(0);"><i class="fab fa-twitter"></i>Share on Twitter</a></li>
+                                    <li class="wt-linkedin"><a href="javascript:void(0);"><i class="fab fa-linkedin-in"></i>Share on Linkedin</a></li>
+                                    <li class="wt-googleplus"><a href="javascript:void(0);"><i class="fab fa-google-plus-g"></i>Share on Google Plus</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="wt-widget wt-reportjob">
+                            <div class="wt-widgettitle">
+                                <h2>Report This Job</h2>
+                            </div>
+                            <div class="wt-widgetcontent">
+                                <form class="wt-formtheme wt-formreport">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <span class="wt-select">
+                                                <select>
+                                                    <option value="Reason">Select Reason</option>
+                                                    <option value="Reason1">Reason 1</option>
+                                                    <option value="Reason2">Reason 2</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" placeholder="Description"></textarea>
+                                        </div>
+                                        <div class="form-group wt-btnarea">
+                                            <a href="#" class="wt-btn">Submit</a>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- User Listing End-->
+</div>
+</main>
+{% endblock content %}

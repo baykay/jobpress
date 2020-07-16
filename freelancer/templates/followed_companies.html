@@ -1,0 +1,63 @@
+{% extends 'dashboard_base.html' %}
+{% block title %}<title>{{ user.freelancer_profile }} Saved Items</title>{% endblock title %}
+{% block dashboard %}
+<section class="wt-haslayout wt-dbsectionspace">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
+            <div class="wt-dashboardbox wt-dashboardtabsholder wt-saveitemholder">
+                <div class="wt-dashboardtabs">
+                    <ul class="wt-tabstitle nav navbar-nav">
+                        <li class="nav-item"><a href="{% url 'freelancer:saved_job_view' %}">Saved Jobs</a></li>
+                        <li class="nav-item"><a class="active" data-toggle="tab" href="#wt-education">Followed Companies</a></li>
+                        <li class="nav-item"><a href="#wt-awards">Liked Freelancers</a></li>
+                    </ul>
+                </div>
+                <div class="wt-tabscontent tab-content tab-savecontent">
+                    <div class="wt-educationholder tab-pane  active fade show" id="wt-education">
+                        <div class="wt-userexperience wt-followcompomy">
+                            <div class="wt-tabscontenttitle">
+                                <h2>Followed Companies</h2>
+                            </div>
+                            <div class="wt-focomponylist">
+                                {% for company in followed_companies %}
+                                    <div class="wt-followedcompnies">
+                                        <div class="wt-userlistinghold wt-userlistingsingle">
+                                            <figure class="wt-userlistingimg">
+                                                <img src="{{ company.company_profile.logo.url }}" alt="image description">
+                                            </figure>
+                                            <div class="wt-userlistingcontent">
+                                                <div class="wt-contenthead wt-followcomhead">
+                                                    <div class="wt-title">
+                                                        {% if company.company_profile.confirmed %}
+                                                            <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Verified Company</a>
+                                                        {% else %}
+                                                            <a href="javascript:void(0);"><i class="fa fa--circle"></i> UnVerified Company</a>
+                                                        {% endif %}
+                                                        <h3>{{ company.company_profile.name | title }}</h3>
+                                                    </div>
+                                                    <ul class="wt-followcompomy-breadcrumb wt-userlisting-breadcrumb">
+                                                        <li><a href="javascript:void(0);"> Open Jobs  </a></li>
+                                                        <li><a href="{% url 'company:company_detail' username=company.username %}"> Full Profile</a></li>
+                                                        <li><a href="javascript:void(0);" disabled class="wt-savefollow wt-btndisbaled"> Following</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% empty %}
+                                    You have not followed any company yet, search for a company or go to the
+                                    <a href="{% url 'company:companies_list' %}">Companies Page</a> to follow a company.
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <nav class="wt-pagination wt-savepagination">
+                            {% include 'partials/pagination.html' %}
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'partials/freelancer_sidebar.html' %}
+    </div>
+</section>
+{% endblock dashboard %}

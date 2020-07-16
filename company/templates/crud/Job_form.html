@@ -1,0 +1,107 @@
+{% extends 'dashboard_base.html' %}
+{% block title %}
+    <title>{% if not form.instance.pk %}Post Job{% else %}{{ form.instance.title }}{% endif %}</title>
+{% endblock %}
+{% block dashboard %}
+<section class="wt-haslayout wt-dbsectionspace">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 m-auto">
+            <div class="wt-dashboardbox">
+                {% include 'partials/messages.html' %}
+                <div class="wt-dashboardboxtitle">
+                    <h2>{% if not form.instance.pk %}Post a Job{% else %}<strong>Update: </strong>{{ form.instance.title }}{% endif %}</h2>
+                </div>
+                <div class="wt-dashboardboxcontent">
+                    <div class="wt-jobdescription wt-tabsinfo">
+                        <form method="post" class="wt-formtheme wt-userform wt-userformvtwo" novalidate>{% csrf_token %}
+                            <fieldset>
+                                <div class="wt-tabscontenttitle">
+                                    <h2>Job Description</h2>
+                                </div>
+                                <div class="form-group">
+                                    {{ form.title }}
+                                    <small>{{ form.title.errors }}</small>
+                                </div>
+                                <div class="wt-jobskills wt-tabsinfo">
+                                    <div class="form-group">
+                                        {{ form.job_type }}
+                                    </div>
+                                    <small>{{ form.job_type.errors }}</small>
+
+                                </div>
+                                <div class="wt-jobskills wt-tabsinfo">
+                                    <div class="form-group">
+                                        {{ form.account_type }}
+                                    </div>
+                                    <small>{{ form.account_type.errors }}</small>
+                                </div>
+                                <div class="wt-jobskills wt-tabsinfo">
+                                    <div class="wt-tabscontenttitle">
+                                        <h2>Skills Required</h2>
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.skills }}
+                                    </div>
+                                    {{ form.skills.errors }}
+                                </div>
+                                <div class="wt-jobdetails wt-tabsinfo">
+                                    <div class="wt-tabscontenttitle">
+                                        <h2>Job Details</h2>
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.description }}
+                                        <small>{{ form.description.errors }}</small>
+                                    </div>
+                                    <div class="wt-jobskills wt-tabsinfo">
+                                        <div class="form-group">
+                                            {{ form.category }}
+                                        </div>
+                                        <small>{{ form.category.errors }}</small>
+                                    </div>
+                                    <div class="wt-jobskills wt-tabsinfo">
+                                        <div class="form-group">
+                                            {{ form.country }}
+                                        </div>
+                                        {{ form.country.errors }}
+                                    </div>
+                                    <div class="wt-jobskills wt-tabsinfo">
+                                        <div class="form-group">
+                                            {{ form.department }}
+                                        </div>
+                                        {{ form.department.errors }}
+                                    </div>
+                                    <div class="wt-jobskills wt-tabsinfo">
+                                        <div class="form-group">
+                                            {{ form.duration }}
+                                        </div>
+                                        {{ form.duration.errors }}
+                                    </div>
+                                    <div class="wt-jobskills wt-tabsinfo">
+                                        <div class="form-group">
+                                            {{ form.membership }}
+                                        </div>
+                                        {{ form.membership.errors }}
+                                    </div>
+                                    <div class="form-group form-group-half wt-formwithlabel">
+                                        <span>
+                                            {{ form.proposals_due_date }}
+                                            <small>{{ form.proposals_due_date.errors }}</small>
+                                        </span>
+                                    </div>
+                                    <div class="form-group form-group-half wt-btnarea">
+                                        {% if not form.instance.pk %}
+                                            <button type="submit" class="wt-btn">Post Job</button>
+                                        {% else %}
+                                            <button type="submit" class="wt-btn">Update Job</button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock dashboard %}
