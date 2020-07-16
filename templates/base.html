@@ -4,9 +4,7 @@
 <html class="no-js" lang="">
 <head>
     {% block title %}<title></title>{% endblock %}
-    {% block style %}
-        {% include 'partials/stylesheet.html' %}
-    {% endblock %}
+    {% include 'partials/stylesheet.html' %}
 </head>
 <body {% if not user.is_authenticated %}class="" {% else %}class="wt-login"{% endif %}>
 {#	<!-- Preloader Start -->#}
