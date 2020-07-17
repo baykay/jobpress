@@ -5279,3 +5279,485 @@ Not Found: /static/js/main.8907389d62a1.js
 /home/young/Dev/JobPress/JobPress/settings.py changed, reloading.
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
+"GET /company/statistics/ HTTP/1.1" 500 59
+"GET /company/statistics/ HTTP/1.1" 500 59
+"GET /company/statistics/ HTTP/1.1" 500 59
+"GET /company/statistics/ HTTP/1.1" 500 59
+/home/young/Dev/JobPress/JobPress/settings.py changed, reloading.
+/home/young/Dev/JobPress/JobPress/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/base.py", line 104, in get_thumbnail
+    source_image = default.engine.get_image(source)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/engines/pil_engine.py", line 72, in get_image
+    buffer = BytesIO(source.read())
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/images.py", line 162, in read
+    f = self.storage.open(self.name)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/core/files/storage.py", line 36, in open
+    return self._open(name, mode)
+  File "/home/young/Dev/JobPress/cloudinary_storage/storage.py", line 52, in _open
+    raise IOError
+OSError
+Remote file [company.png] at [150x150] does not exist
+Thumbnail tag failed
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 828, in _resolve_lookup
+    current = current[bit]
+TypeError: 'ImageFile' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/templatetags/thumbnail.py", line 56, in render
+    return self._render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/templatetags/thumbnail.py", line 149, in _render
+    output = self.nodelist_file.render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 903, in render_annotated
+    return self.render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 986, in render
+    output = self.filter_expression.resolve(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 670, in resolve
+    obj = self.var.resolve(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 795, in resolve
+    value = self._resolve_lookup(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 836, in _resolve_lookup
+    current = getattr(current, bit)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/images.py", line 54, in width
+    return self.size[0]
+TypeError: 'NoneType' object is not subscriptable
+
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/base.py", line 104, in get_thumbnail
+    source_image = default.engine.get_image(source)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/engines/pil_engine.py", line 72, in get_image
+    buffer = BytesIO(source.read())
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/images.py", line 162, in read
+    f = self.storage.open(self.name)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/core/files/storage.py", line 36, in open
+    return self._open(name, mode)
+  File "/home/young/Dev/JobPress/cloudinary_storage/storage.py", line 52, in _open
+    raise IOError
+OSError
+Remote file [company.png] at [150x150] does not exist
+Thumbnail tag failed
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 828, in _resolve_lookup
+    current = current[bit]
+TypeError: 'ImageFile' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/templatetags/thumbnail.py", line 56, in render
+    return self._render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/templatetags/thumbnail.py", line 149, in _render
+    output = self.nodelist_file.render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 903, in render_annotated
+    return self.render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 986, in render
+    output = self.filter_expression.resolve(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 670, in resolve
+    obj = self.var.resolve(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 795, in resolve
+    value = self._resolve_lookup(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 836, in _resolve_lookup
+    current = getattr(current, bit)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/images.py", line 54, in width
+    return self.size[0]
+TypeError: 'NoneType' object is not subscriptable
+
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/base.py", line 104, in get_thumbnail
+    source_image = default.engine.get_image(source)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/engines/pil_engine.py", line 72, in get_image
+    buffer = BytesIO(source.read())
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/images.py", line 162, in read
+    f = self.storage.open(self.name)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/core/files/storage.py", line 36, in open
+    return self._open(name, mode)
+  File "/home/young/Dev/JobPress/cloudinary_storage/storage.py", line 52, in _open
+    raise IOError
+OSError
+Remote file [company_banners/img-02_zySKu6e_Go8qQzq.jpg] at [270x150] does not exist
+Thumbnail tag failed
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 828, in _resolve_lookup
+    current = current[bit]
+TypeError: 'ImageFile' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/templatetags/thumbnail.py", line 56, in render
+    return self._render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/templatetags/thumbnail.py", line 149, in _render
+    output = self.nodelist_file.render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 903, in render_annotated
+    return self.render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 986, in render
+    output = self.filter_expression.resolve(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 670, in resolve
+    obj = self.var.resolve(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 795, in resolve
+    value = self._resolve_lookup(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 836, in _resolve_lookup
+    current = getattr(current, bit)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/images.py", line 54, in width
+    return self.size[0]
+TypeError: 'NoneType' object is not subscriptable
+
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/base.py", line 104, in get_thumbnail
+    source_image = default.engine.get_image(source)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/engines/pil_engine.py", line 72, in get_image
+    buffer = BytesIO(source.read())
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/images.py", line 162, in read
+    f = self.storage.open(self.name)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/core/files/storage.py", line 36, in open
+    return self._open(name, mode)
+  File "/home/young/Dev/JobPress/cloudinary_storage/storage.py", line 52, in _open
+    raise IOError
+OSError
+Remote file [company_banners/img-02_zySKu6e_Go8qQzq.jpg] at [270x150] does not exist
+Thumbnail tag failed
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 828, in _resolve_lookup
+    current = current[bit]
+TypeError: 'ImageFile' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/templatetags/thumbnail.py", line 56, in render
+    return self._render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/templatetags/thumbnail.py", line 149, in _render
+    output = self.nodelist_file.render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 903, in render_annotated
+    return self.render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 986, in render
+    output = self.filter_expression.resolve(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 670, in resolve
+    obj = self.var.resolve(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 795, in resolve
+    value = self._resolve_lookup(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 836, in _resolve_lookup
+    current = getattr(current, bit)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/images.py", line 54, in width
+    return self.size[0]
+TypeError: 'NoneType' object is not subscriptable
+
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/base.py", line 104, in get_thumbnail
+    source_image = default.engine.get_image(source)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/engines/pil_engine.py", line 72, in get_image
+    buffer = BytesIO(source.read())
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/images.py", line 162, in read
+    f = self.storage.open(self.name)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/core/files/storage.py", line 36, in open
+    return self._open(name, mode)
+  File "/home/young/Dev/JobPress/cloudinary_storage/storage.py", line 52, in _open
+    raise IOError
+OSError
+Remote file [company.png] at [150x150] does not exist
+Thumbnail tag failed
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 828, in _resolve_lookup
+    current = current[bit]
+TypeError: 'ImageFile' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/templatetags/thumbnail.py", line 56, in render
+    return self._render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/templatetags/thumbnail.py", line 149, in _render
+    output = self.nodelist_file.render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 903, in render_annotated
+    return self.render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 986, in render
+    output = self.filter_expression.resolve(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 670, in resolve
+    obj = self.var.resolve(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 795, in resolve
+    value = self._resolve_lookup(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 836, in _resolve_lookup
+    current = getattr(current, bit)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/images.py", line 54, in width
+    return self.size[0]
+TypeError: 'NoneType' object is not subscriptable
+
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/base.py", line 104, in get_thumbnail
+    source_image = default.engine.get_image(source)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/engines/pil_engine.py", line 72, in get_image
+    buffer = BytesIO(source.read())
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/images.py", line 162, in read
+    f = self.storage.open(self.name)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/core/files/storage.py", line 36, in open
+    return self._open(name, mode)
+  File "/home/young/Dev/JobPress/cloudinary_storage/storage.py", line 52, in _open
+    raise IOError
+OSError
+Remote file [company.png] at [150x150] does not exist
+Thumbnail tag failed
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 828, in _resolve_lookup
+    current = current[bit]
+TypeError: 'ImageFile' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/templatetags/thumbnail.py", line 56, in render
+    return self._render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/templatetags/thumbnail.py", line 149, in _render
+    output = self.nodelist_file.render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 903, in render_annotated
+    return self.render(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 986, in render
+    output = self.filter_expression.resolve(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 670, in resolve
+    obj = self.var.resolve(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 795, in resolve
+    value = self._resolve_lookup(context)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/django/template/base.py", line 836, in _resolve_lookup
+    current = getattr(current, bit)
+  File "/home/young/Dev/JobPress/venv/lib/python3.8/site-packages/sorl/thumbnail/images.py", line 54, in width
+    return self.size[0]
+TypeError: 'NoneType' object is not subscriptable
+"GET /company/statistics/ HTTP/1.1" 200 34718
+"GET /company/statistics/ HTTP/1.1" 200 34718
+Not Found: /static/css/bootstrap.min.450fc463b8b1.css
+Not Found: /static/css/bootstrap.min.450fc463b8b1.css
+"GET /static/css/bootstrap.min.450fc463b8b1.css HTTP/1.1" 404 179
+"GET /static/css/bootstrap.min.450fc463b8b1.css HTTP/1.1" 404 179
+Not Found: /static/css/normalize.7c996f215791.css
+Not Found: /static/css/normalize.7c996f215791.css
+"GET /static/css/normalize.7c996f215791.css HTTP/1.1" 404 179
+"GET /static/css/normalize.7c996f215791.css HTTP/1.1" 404 179
+Not Found: /static/css/scrollbar.92db912b7ff3.css
+Not Found: /static/css/scrollbar.92db912b7ff3.css
+"GET /static/css/scrollbar.92db912b7ff3.css HTTP/1.1" 404 179
+"GET /static/css/scrollbar.92db912b7ff3.css HTTP/1.1" 404 179
+Not Found: /static/css/fontawesome/fontawesome-all.20ac19cde4ae.css
+Not Found: /static/css/fontawesome/fontawesome-all.20ac19cde4ae.css
+"GET /static/css/fontawesome/fontawesome-all.20ac19cde4ae.css HTTP/1.1" 404 179
+"GET /static/css/fontawesome/fontawesome-all.20ac19cde4ae.css HTTP/1.1" 404 179
+Not Found: /static/css/font-awesome.min.63dc7a542ce4.css
+Not Found: /static/css/font-awesome.min.63dc7a542ce4.css
+"GET /static/css/font-awesome.min.63dc7a542ce4.css HTTP/1.1" 404 179
+"GET /static/css/font-awesome.min.63dc7a542ce4.css HTTP/1.1" 404 179
+Not Found: /static/css/themify-icons.683053eec5a0.css
+Not Found: /static/css/themify-icons.683053eec5a0.css
+"GET /static/css/themify-icons.683053eec5a0.css HTTP/1.1" 404 179
+"GET /static/css/themify-icons.683053eec5a0.css HTTP/1.1" 404 179
+Not Found: /static/css/owl.carousel.min.16bf6fd4b4ab.css
+Not Found: /static/css/owl.carousel.min.16bf6fd4b4ab.css
+"GET /static/css/owl.carousel.min.16bf6fd4b4ab.css HTTP/1.1" 404 179
+"GET /static/css/owl.carousel.min.16bf6fd4b4ab.css HTTP/1.1" 404 179
+Not Found: /static/css/jquery-ui.eaffe0ebd695.css
+Not Found: /static/css/jquery-ui.eaffe0ebd695.css
+"GET /static/css/jquery-ui.eaffe0ebd695.css HTTP/1.1" 404 179
+"GET /static/css/jquery-ui.eaffe0ebd695.css HTTP/1.1" 404 179
+Not Found: /static/css/linearicons.57a2044481e4.css
+Not Found: /static/css/linearicons.57a2044481e4.css
+"GET /static/css/linearicons.57a2044481e4.css HTTP/1.1" 404 179
+"GET /static/css/linearicons.57a2044481e4.css HTTP/1.1" 404 179
+Not Found: /static/css/tipso.1ca2e50ecee9.css
+Not Found: /static/css/tipso.1ca2e50ecee9.css
+"GET /static/css/tipso.1ca2e50ecee9.css HTTP/1.1" 404 179
+"GET /static/css/tipso.1ca2e50ecee9.css HTTP/1.1" 404 179
+Not Found: /static/css/chosen.55b57a23a449.css
+Not Found: /static/css/chosen.55b57a23a449.css
+"GET /static/css/chosen.55b57a23a449.css HTTP/1.1" 404 179
+"GET /static/css/chosen.55b57a23a449.css HTTP/1.1" 404 179
+Not Found: /static/css/prettyPhoto.14028ac81610.css
+Not Found: /static/css/prettyPhoto.14028ac81610.css
+Not Found: /static/css/dashboard.e237b7976602.css
+Not Found: /static/css/dashboard.e237b7976602.css
+"GET /static/css/dashboard.e237b7976602.css HTTP/1.1" 404 179
+"GET /static/css/dashboard.e237b7976602.css HTTP/1.1" 404 179
+Not Found: /static/css/transitions.c263a2787490.css
+Not Found: /static/css/transitions.c263a2787490.css
+"GET /static/css/transitions.c263a2787490.css HTTP/1.1" 404 179
+"GET /static/css/transitions.c263a2787490.css HTTP/1.1" 404 179
+Not Found: /static/css/main.288784999708.css
+Not Found: /static/css/main.288784999708.css
+"GET /static/css/main.288784999708.css HTTP/1.1" 404 179
+"GET /static/css/main.288784999708.css HTTP/1.1" 404 179
+Not Found: /static/css/dbresponsive.857b887d2bc2.css
+Not Found: /static/css/dbresponsive.857b887d2bc2.css
+Not Found: /static/css/color.4323b2d77127.css
+Not Found: /static/css/color.4323b2d77127.css
+"GET /static/css/color.4323b2d77127.css HTTP/1.1" 404 179
+"GET /static/css/color.4323b2d77127.css HTTP/1.1" 404 179
+Not Found: /static/css/responsive.3f9cbc676a80.css
+Not Found: /static/css/responsive.3f9cbc676a80.css
+"GET /static/css/responsive.3f9cbc676a80.css HTTP/1.1" 404 179
+"GET /static/css/responsive.3f9cbc676a80.css HTTP/1.1" 404 179
+"GET /static/css/dbresponsive.857b887d2bc2.css HTTP/1.1" 404 179
+"GET /static/css/dbresponsive.857b887d2bc2.css HTTP/1.1" 404 179
+"GET /static/css/prettyPhoto.14028ac81610.css HTTP/1.1" 404 179
+"GET /static/css/prettyPhoto.14028ac81610.css HTTP/1.1" 404 179
+Not Found: /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.c5de01ee6da0.js
+Not Found: /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.c5de01ee6da0.js
+"GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.c5de01ee6da0.js HTTP/1.1" 404 179
+"GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.c5de01ee6da0.js HTTP/1.1" 404 179
+Not Found: /static/js/vendor/jquery-3.3.1.6a07da9fae93.js
+Not Found: /static/js/vendor/jquery-3.3.1.6a07da9fae93.js
+"GET /static/js/vendor/jquery-3.3.1.6a07da9fae93.js HTTP/1.1" 404 179
+"GET /static/js/vendor/jquery-3.3.1.6a07da9fae93.js HTTP/1.1" 404 179
+Not Found: /static/js/vendor/jquery-library.4f252523d4af.js
+Not Found: /static/js/vendor/jquery-library.4f252523d4af.js
+"GET /static/js/vendor/jquery-library.4f252523d4af.js HTTP/1.1" 404 179
+"GET /static/js/vendor/jquery-library.4f252523d4af.js HTTP/1.1" 404 179
+Not Found: /static/js/vendor/bootstrap.min.14d449eb8876.js
+Not Found: /static/js/vendor/bootstrap.min.14d449eb8876.js
+"GET /static/js/vendor/bootstrap.min.14d449eb8876.js HTTP/1.1" 404 179
+"GET /static/js/vendor/bootstrap.min.14d449eb8876.js HTTP/1.1" 404 179
+Not Found: /static/js/owl.carousel.min.b7b9c97cd68e.js
+Not Found: /static/js/owl.carousel.min.b7b9c97cd68e.js
+"GET /static/js/owl.carousel.min.b7b9c97cd68e.js HTTP/1.1" 404 179
+"GET /static/js/owl.carousel.min.b7b9c97cd68e.js HTTP/1.1" 404 179
+Not Found: /static/js/tilt.jquery.ebf1d61f8d5f.js
+Not Found: /static/js/tilt.jquery.ebf1d61f8d5f.js
+"GET /static/js/tilt.jquery.ebf1d61f8d5f.js HTTP/1.1" 404 179
+"GET /static/js/tilt.jquery.ebf1d61f8d5f.js HTTP/1.1" 404 179
+Not Found: /static/js/chosen.jquery.640e30a8967c.js
+Not Found: /static/js/chosen.jquery.640e30a8967c.js
+Not Found: /static/js/prettyPhoto.f81c3c778084.js
+Not Found: /static/js/prettyPhoto.f81c3c778084.js
+"GET /static/js/chosen.jquery.640e30a8967c.js HTTP/1.1" 404 179
+"GET /static/js/chosen.jquery.640e30a8967c.js HTTP/1.1" 404 179
+Not Found: /static/js/scrollbar.min.42a368e95b4a.js
+"GET /static/js/prettyPhoto.f81c3c778084.js HTTP/1.1" 404 179
+"GET /static/js/prettyPhoto.f81c3c778084.js HTTP/1.1" 404 179
+Not Found: /static/js/scrollbar.min.42a368e95b4a.js
+"GET /static/js/scrollbar.min.42a368e95b4a.js HTTP/1.1" 404 179
+"GET /static/js/scrollbar.min.42a368e95b4a.js HTTP/1.1" 404 179
+Not Found: /static/js/jquery-ui.b6bd982ccb4f.js
+Not Found: /static/js/jquery-ui.b6bd982ccb4f.js
+"GET /static/js/jquery-ui.b6bd982ccb4f.js HTTP/1.1" 404 179
+"GET /static/js/jquery-ui.b6bd982ccb4f.js HTTP/1.1" 404 179
+Not Found: /static/js/readmore.c91b62ff1f46.js
+Not Found: /static/js/readmore.c91b62ff1f46.js
+"GET /static/js/readmore.c91b62ff1f46.js HTTP/1.1" 404 179
+"GET /static/js/readmore.c91b62ff1f46.js HTTP/1.1" 404 179
+Not Found: /static/js/countTo.acad36d38da9.js
+Not Found: /static/js/countTo.acad36d38da9.js
+"GET /static/js/countTo.acad36d38da9.js HTTP/1.1" 404 179
+"GET /static/js/countTo.acad36d38da9.js HTTP/1.1" 404 179
+Not Found: /static/js/appear.c2474adb496a.js
+Not Found: /static/js/appear.c2474adb496a.js
+"GET /static/js/appear.c2474adb496a.js HTTP/1.1" 404 179
+"GET /static/js/appear.c2474adb496a.js HTTP/1.1" 404 179
+Not Found: /static/js/tipso.8d6e77ce486f.js
+Not Found: /static/js/tipso.8d6e77ce486f.js
+"GET /static/js/tipso.8d6e77ce486f.js HTTP/1.1" 404 179
+"GET /static/js/tipso.8d6e77ce486f.js HTTP/1.1" 404 179
+Not Found: /static/js/chart.ae4cd3db34d0.js
+Not Found: /static/js/chart.ae4cd3db34d0.js
+"GET /static/js/chart.ae4cd3db34d0.js HTTP/1.1" 404 179
+"GET /static/js/chart.ae4cd3db34d0.js HTTP/1.1" 404 179
+Not Found: /static/js/jRate.549a04410866.js
+Not Found: /static/js/jRate.549a04410866.js
+"GET /static/js/jRate.549a04410866.js HTTP/1.1" 404 179
+"GET /static/js/jRate.549a04410866.js HTTP/1.1" 404 179
+Not Found: /static/js/main.8907389d62a1.js
+Not Found: /static/js/main.8907389d62a1.js
+"GET /static/js/main.8907389d62a1.js HTTP/1.1" 404 179
+"GET /static/js/main.8907389d62a1.js HTTP/1.1" 404 179
+Not Found: /static/images/logo.ac974c5be65e.png
+Not Found: /static/images/logo.ac974c5be65e.png
+"GET /static/images/logo.ac974c5be65e.png HTTP/1.1" 404 179
+"GET /static/images/logo.ac974c5be65e.png HTTP/1.1" 404 179
+Not Found: /static/images/thumbnail/img-17.1aeb498cbdf5.png
+Not Found: /static/images/thumbnail/img-16.0d3be9ffc495.png
+Not Found: /static/images/thumbnail/img-16.0d3be9ffc495.png
+Not Found: /static/images/thumbnail/img-17.1aeb498cbdf5.png
+"GET /static/images/thumbnail/img-17.1aeb498cbdf5.png HTTP/1.1" 404 179
+"GET /static/images/thumbnail/img-17.1aeb498cbdf5.png HTTP/1.1" 404 179
+"GET /static/images/thumbnail/img-16.0d3be9ffc495.png HTTP/1.1" 404 179
+"GET /static/images/thumbnail/img-16.0d3be9ffc495.png HTTP/1.1" 404 179
+Not Found: /static/images/thumbnail/img-15.036b059c8b3e.png
+Not Found: /static/images/thumbnail/img-15.036b059c8b3e.png
+"GET /static/images/thumbnail/img-15.036b059c8b3e.png HTTP/1.1" 404 179
+"GET /static/images/thumbnail/img-15.036b059c8b3e.png HTTP/1.1" 404 179
+Not Found: /static/images/thumbnail/img-18.5d037f39b7ee.png
+Not Found: /static/images/thumbnail/img-18.5d037f39b7ee.png
+"GET /static/images/thumbnail/img-18.5d037f39b7ee.png HTTP/1.1" 404 179
+"GET /static/images/thumbnail/img-18.5d037f39b7ee.png HTTP/1.1" 404 179
+Not Found: /static/images/thumbnail/img-19.21680ea79379.png
+Not Found: /static/images/thumbnail/img-19.21680ea79379.png
+"GET /static/images/thumbnail/img-19.21680ea79379.png HTTP/1.1" 404 179
+"GET /static/images/thumbnail/img-19.21680ea79379.png HTTP/1.1" 404 179
+Not Found: /static/images/thumbnail/img-20.65a868b8d448.png
+Not Found: /static/images/thumbnail/img-20.65a868b8d448.png
+"GET /static/images/thumbnail/img-20.65a868b8d448.png HTTP/1.1" 404 179
+"GET /static/images/thumbnail/img-20.65a868b8d448.png HTTP/1.1" 404 179
+Not Found: /static/images/thumbnail/img-21.a535c6da7619.png
+Not Found: /static/images/thumbnail/img-21.a535c6da7619.png
+"GET /static/images/thumbnail/img-21.a535c6da7619.png HTTP/1.1" 404 179
+"GET /static/images/thumbnail/img-21.a535c6da7619.png HTTP/1.1" 404 179
+Not Found: /static/images/thumbnail/img-22.c15d68830b98.png
+Not Found: /static/images/thumbnail/img-22.c15d68830b98.png
+"GET /static/images/thumbnail/img-22.c15d68830b98.png HTTP/1.1" 404 179
+"GET /static/images/thumbnail/img-22.c15d68830b98.png HTTP/1.1" 404 179
+Not Found: /static/js/tilt.jquery.ebf1d61f8d5f.js
+Not Found: /static/js/tilt.jquery.ebf1d61f8d5f.js
+"GET /static/js/tilt.jquery.ebf1d61f8d5f.js HTTP/1.1" 404 179
+"GET /static/js/tilt.jquery.ebf1d61f8d5f.js HTTP/1.1" 404 179
+Not Found: /static/js/scrollbar.min.42a368e95b4a.js
+Not Found: /static/js/scrollbar.min.42a368e95b4a.js
+"GET /static/js/scrollbar.min.42a368e95b4a.js HTTP/1.1" 404 179
+"GET /static/js/scrollbar.min.42a368e95b4a.js HTTP/1.1" 404 179
+Not Found: /static/js/prettyPhoto.f81c3c778084.js
+Not Found: /static/js/prettyPhoto.f81c3c778084.js
+"GET /static/js/prettyPhoto.f81c3c778084.js HTTP/1.1" 404 179
+"GET /static/js/prettyPhoto.f81c3c778084.js HTTP/1.1" 404 179
+Not Found: /static/js/jquery-ui.b6bd982ccb4f.js
+Not Found: /static/js/jquery-ui.b6bd982ccb4f.js
+"GET /static/js/jquery-ui.b6bd982ccb4f.js HTTP/1.1" 404 179
+"GET /static/js/jquery-ui.b6bd982ccb4f.js HTTP/1.1" 404 179
+Not Found: /static/js/readmore.c91b62ff1f46.js
+Not Found: /static/js/readmore.c91b62ff1f46.js
+"GET /static/js/readmore.c91b62ff1f46.js HTTP/1.1" 404 179
+"GET /static/js/readmore.c91b62ff1f46.js HTTP/1.1" 404 179
+Not Found: /static/js/countTo.acad36d38da9.js
+Not Found: /static/js/countTo.acad36d38da9.js
+"GET /static/js/countTo.acad36d38da9.js HTTP/1.1" 404 179
+"GET /static/js/countTo.acad36d38da9.js HTTP/1.1" 404 179
+Not Found: /static/js/appear.c2474adb496a.js
+Not Found: /static/js/appear.c2474adb496a.js
+"GET /static/js/appear.c2474adb496a.js HTTP/1.1" 404 179
+"GET /static/js/appear.c2474adb496a.js HTTP/1.1" 404 179
+Not Found: /static/js/tipso.8d6e77ce486f.js
+Not Found: /static/js/tipso.8d6e77ce486f.js
+"GET /static/js/tipso.8d6e77ce486f.js HTTP/1.1" 404 179
+"GET /static/js/tipso.8d6e77ce486f.js HTTP/1.1" 404 179
+Not Found: /static/js/chart.ae4cd3db34d0.js
+Not Found: /static/js/chart.ae4cd3db34d0.js
+"GET /static/js/chart.ae4cd3db34d0.js HTTP/1.1" 404 179
+"GET /static/js/chart.ae4cd3db34d0.js HTTP/1.1" 404 179
+Not Found: /static/js/jRate.549a04410866.js
+Not Found: /static/js/jRate.549a04410866.js
+"GET /static/js/jRate.549a04410866.js HTTP/1.1" 404 179
+"GET /static/js/jRate.549a04410866.js HTTP/1.1" 404 179
+Not Found: /static/js/main.8907389d62a1.js
+Not Found: /static/js/main.8907389d62a1.js
+"GET /static/js/main.8907389d62a1.js HTTP/1.1" 404 179
+"GET /static/js/main.8907389d62a1.js HTTP/1.1" 404 179
