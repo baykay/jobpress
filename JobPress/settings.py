@@ -50,21 +50,21 @@ if DEBUG:
     ALLOWED_HOSTS = []
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
-    # DATABASES = {}
-    # DATABASES['default'] = dj_database_url.config()
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'job_press',
-            'HOST': '127.0.0.1',
-            'PASSWORD': '',
-            'USER': 'root',
-            'PORT': 3306,
-            'OPTIONS': {
-                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-            }
-        }
-    }
+    DATABASES = {}
+    DATABASES['default'] = dj_database_url.config()
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.mysql',
+    #         'NAME': 'job_press',
+    #         'HOST': '127.0.0.1',
+    #         'PASSWORD': '',
+    #         'USER': 'root',
+    #         'PORT': 3306,
+    #         'OPTIONS': {
+    #             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+    #         }
+    #     }
+    # }
     ALLOWED_HOSTS = ['localhost', 'job-press.herokuapp.com']
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     DEFAULT_FILE_STORAGE = config('DEFAULT_FILE_STORAGE')
