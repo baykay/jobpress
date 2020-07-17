@@ -5275,3 +5275,7 @@ Not Found: /static/js/main.8907389d62a1.js
 Not Found: /static/js/main.8907389d62a1.js
 "GET /static/js/main.8907389d62a1.js HTTP/1.1" 404 179
 "GET /static/js/main.8907389d62a1.js HTTP/1.1" 404 179
+/home/young/Dev/JobPress/JobPress/settings.py changed, reloading.
+/home/young/Dev/JobPress/JobPress/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
