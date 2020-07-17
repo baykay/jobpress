@@ -108,6 +108,5 @@ class Command(BaseCommand):
                 )
                 company_to_save.save()
                 company_to_save.interests.add(freelancer_interests)
-                print(freelancer_username, passwords)
 
         self.stdout.write(self.style.SUCCESS('Users Generated Successfully...'))

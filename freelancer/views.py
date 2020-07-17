@@ -149,7 +149,6 @@ class FreelancerListView(ContextData, ListView):
         select_freelancer_by_interests = self.request.GET.getlist('select_freelancer_by_interests')
         freelancer_by_country = self.request.GET.get('freelancer_by_country')
         if freelancer_by_hourly_rate:
-            print(freelancer_by_hourly_rate)
             gt_hire_rate = freelancer_by_hourly_rate.split('-')[0]
             lt_hire_rate = freelancer_by_hourly_rate.split('-')[1]
             return self.model.objects.filter(
