@@ -1,6 +1,8 @@
 import os
 import random
 from django.core.management.base import BaseCommand
+from django.utils.text import slugify
+
 from accounts import models as accounts
 
 descriptions = '''
@@ -23,6 +25,7 @@ class Command(BaseCommand):
                     category = accounts.CountryModel.objects.create(
                         description=description,
                         name=title,
+                        slug=slugify(title)
                     )
                     category.save()
                     seen.add(name_row)

@@ -24,7 +24,7 @@
                                 <li><span><i class="far fa-clock"></i> Duration: {{ job.duration }}</span></li>
                             </ul>
                         </div>
-                        {% if request.user.is_authenticated and request.user.is_freelancer %}
+                        {% if request.user.is_authenticated %}
                             {% is_already_applied job request.user as is_applied %}
                             {% if is_applied %}
                                 <button type="button" class="wt-btn float-right m-auto">You have applied</button>

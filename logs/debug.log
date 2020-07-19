@@ -6681,3 +6681,9 @@ Not Found: /static/fonts/fontawesome-webfont3e6e.d41d8cd98f00.ttf
 /home/young/Dev/JobPress/JobPress/settings.py changed, reloading.
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
+"GET /jobs/accounts/religion/ HTTP/1.1" 500 59
+"GET /jobs/accounts/religion/ HTTP/1.1" 500 59
+"GET /jobs/departments/receptionist/ HTTP/1.1" 500 59
+"GET /jobs/departments/receptionist/ HTTP/1.1" 500 59
+"GET /jobs/countries/afghanistan1/ HTTP/1.1" 500 59
+"GET /jobs/countries/afghanistan1/ HTTP/1.1" 500 59
